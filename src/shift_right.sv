@@ -1,11 +1,9 @@
-module shift_right #(
-    data_length = 32
-) (
+module shift_right #( parameter data_length = 32) (
     input IR, input [$clog2(data_length) -1:0] shift, input [data_length - 1:0] B,
     output [data_length - 1:0] H
 );
 wire[($clog2(data_length)):0][data_length - 1:0] muxconnector;
-
+wire [data_length - 1:0] mux2B;
 genvar i, j, k;
 generate
     
@@ -20,7 +18,8 @@ for (j = 0; j < ($clog2(data_length)) ; j = j + 1) begin
 end
     
 endgenerate
-assign {<<{muxconnector[0]}} =  B;
+assign mux2B = {<<{muxconnector[0]}} ;
+assign mux2B =  B;
 assign H = {<<{muxconnector[$clog2(data_length)]}}; 
 
 endmodule

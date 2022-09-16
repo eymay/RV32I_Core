@@ -1,7 +1,7 @@
 module n_bit_mux #(
-    N = 32
+    parameter N = 32
 ) (
-    input s, [N -1 :0] i_n_mux_x, [N-1:0] i_n_mux_y, output reg [N-1:0] o_n_mux
+    input s, input [N -1 :0] i_n_mux_x, input [N-1:0] i_n_mux_y, output reg [N-1:0] o_n_mux
 );
 
     always @(*) begin
