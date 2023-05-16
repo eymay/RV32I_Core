@@ -1,8 +1,12 @@
 # RV32I Core
 
 ## Designing Control Word
-
 ### Control Signals
+|5|4|3|2|1|0|
+|-|-|-|-|-|-|
+| s_inc_imm_i_PC| s_reg_imm_ALU_B| s_ALU_dmem_wregdata| sig_w_ctrl_reg|  sig_r_ctrl_data_mem|  sig_w_ctrl_data_mem |
+| PC Select| ALU B Select| Data Mem - ALU Select| Regfile Write |  Data Mem Read|  Data Mem Write |
+
 
 ### Control Word Encoding Table
 
@@ -20,15 +24,14 @@
 
 
 ## Designing Instruction Decoder
-
-### Design ID Block
-
-### Behavioural Simulation of ID Block
+Due to careful selection of control signals in relation to their bit position in instruction word, there is no
+Instruction Decoder needed for this project. It can be seen that the bundles of instruction memory outputs are feed to FU, Regfile and so on.
 
 
 ## Program Counter
 
 ### Design of Branch Controller
+TODO
 
 ### Design of PC Module
 
