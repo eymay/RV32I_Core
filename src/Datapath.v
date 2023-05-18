@@ -10,7 +10,7 @@ module Datapath (
     input [4:0] w_addr_reg,  //o_instruction_mem[11:7]
     output [31:0] o_ALU,
     output [3:0] ZCNV,
-    output [31:0] o_regfile_rreg2,
+    output [31:0] o_regfile_rreg2
 );
 
 wire s_reg_imm_ALU_B;

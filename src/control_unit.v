@@ -1,5 +1,7 @@
 module control_unit (
-    input clk, [2:0] type_select, output reg [5:0] ctrl_wrd
+    input clk,
+    input [2:0] type_select,
+    output reg [5:0] ctrl_wrd
 );
     parameter 
     Load = 3'b000,

@@ -1,5 +1,7 @@
 module immed_gen (
-    input [24:0] field, [1:0]select, output reg [31:0] immediate
+    input [24:0] field,
+    input [1:0]select,
+    output reg [31:0] immediate
 );
     //select[1:0] is opcode[6:5]
     always @(*) begin

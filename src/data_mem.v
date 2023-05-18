@@ -22,7 +22,7 @@ module data_mem #(
     */
     reg [data_length - 1:0] data_mem [register_count - 1:0];
 
-    initial $readmemh("C:/Users/Can/Documents/hw_projects/hw9/src/data_mem.mem", data_mem);
+    initial $readmemh("src/data_mem.mem", data_mem);
 
     always @(*) begin
         r_data_mem = r_ctrl_mem && data_mem[rw_addr_mem];

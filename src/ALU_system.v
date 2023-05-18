@@ -1,6 +1,9 @@
 module ALU_system (
-    input clk, rst,
-    output err_inc_PC, err_imm_PC, [3:0] ZCNV
+    input clk, 
+    input rst,
+    output err_inc_PC,
+    output err_imm_PC,
+    output [3:0] ZCNV
 );
     wire  s_inc_imm_i_PC, sig_w_ctrl_reg, s_reg_imm_ALU_B,
      sig_r_ctrl_data_mem,  sig_w_ctrl_data_mem, s_ALU_dmem_wregdata;
