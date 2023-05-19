@@ -21,8 +21,9 @@ module data_mem #(
     endgenerate
     */
     reg [data_length - 1:0] data_mem [register_count - 1:0];
-
-    initial $readmemh("src/data_mem.mem", data_mem);
+`ifdef COCOTB_SIM
+    initial $readmemh("../../src/data_mem.mem", data_mem);
+`endif
 
     always @(*) begin
         r_data_mem = r_ctrl_mem && data_mem[rw_addr_mem];

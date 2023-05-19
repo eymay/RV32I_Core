@@ -28,7 +28,10 @@ module regfile #(
     param_mux #(.input_length(32), .X_to_1(32)) muxreg2(.i_mux(Q), .en_mux(1'b1), .select(r_addr_reg2), .o_mux(r_data_reg2));
     */
     reg [data_length - 1:0] regfile [register_count - 1:0]; 
-    initial $readmemh("C:/Users/Can/Documents/hw_projects/hw9/src/regfile_mem.mem", regfile);
+
+`ifdef COCOTB_SIM
+    initial $readmemh("../../src/regfile_mem.mem", regfile);
+`endif
     always @(*) begin
         r_data_reg1 = regfile[r_addr_reg1];
         r_data_reg2 = regfile[r_addr_reg2];
