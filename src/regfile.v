@@ -27,19 +27,19 @@ module regfile #(
     param_mux #(.input_length(32), .X_to_1(32)) muxreg1(.i_mux(Q), .en_mux(1'b1),.select(r_addr_reg1), .o_mux(r_data_reg1));
     param_mux #(.input_length(32), .X_to_1(32)) muxreg2(.i_mux(Q), .en_mux(1'b1), .select(r_addr_reg2), .o_mux(r_data_reg2));
     */
-    reg [data_length - 1:0] regfile [register_count - 1:0]; 
+    reg [data_length - 1:0] regs [register_count - 1:0]; 
 
 `ifdef COCOTB_SIM
-    initial $readmemh("../../src/regfile_mem.mem", regfile);
+    initial $readmemh("../../src/regfile_mem.mem", regs);
 `endif
     always @(*) begin
-        r_data_reg1 = regfile[r_addr_reg1];
-        r_data_reg2 = regfile[r_addr_reg2];
+        r_data_reg1 = regs[r_addr_reg1];
+        r_data_reg2 = regs[r_addr_reg2];
     end
 
     always @(posedge clk ) begin
         if(w_ctrl_reg)
-            regfile[w_addr_reg] <= w_data_reg;
+            regs[w_addr_reg] <= w_data_reg;
     end
 
 

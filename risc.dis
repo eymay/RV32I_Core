@@ -1,0 +1,17 @@
+
+risc.elf:	file format elf32-littleriscv
+
+Disassembly of section .text:
+
+00000000 <.text>:
+       0: 33 f6 a5 00  	and	a2, a1, a0
+       4: b3 e6 a5 00  	or	a3, a1, a0
+       8: 33 d7 a5 40  	sra	a4, a1, a0
+       c: b3 d7 a5 00  	srl	a5, a1, a0
+      10: 33 c8 a5 00  	xor	a6, a1, a0
+      14: b3 b8 a5 00  	sltu	a7, a1, a0
+      18: 33 a9 a5 00  	slt	s2, a1, a0
+      1c: b3 89 a5 40  	sub	s3, a1, a0
+      20: 33 8a a5 00  	add	s4, a1, a0
+      24: 23 a0 44 01  	sw	s4, 0(s1)
+      28: 03 2b 0a 00  	lw	s6, 0(s4)

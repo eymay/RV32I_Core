@@ -6,7 +6,7 @@ module instr_mem(
 reg [7:0] imem [127:0];
 //param_mux #(.input_length(32), .X_to_1(32)) mux(.i_mux(imem), .select(r_addr_imem), .o_mux(r_data_imem));
 `ifdef COCOTB_SIM
-    initial $readmemh("../../test.mem", regfile);
+    initial $readmemh("../../test.mem", imem);
 `endif
 always @(*) begin
     r_data_imem = {imem[r_addr_imem + 3],imem[r_addr_imem + 2],imem[r_addr_imem + 1],imem[r_addr_imem]};    
