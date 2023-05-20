@@ -30,9 +30,9 @@ module FunctionUnit (
             SLL, SRL,SRA:
                 S = Shift_result;
             SLT:
-                S = (A_signed > B_signed) ? 1:0;
+                S = (A_signed < B_signed) ? 1:0;
             SLTU:
-                S = (A > B) ? 1:0;
+                S = (A < B) ? 1:0;
 
         endcase
     end
