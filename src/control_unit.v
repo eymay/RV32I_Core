@@ -18,9 +18,9 @@ module control_unit (
             Store:
                 ctrl_wrd <= 6'b010001;
             R_imm:
-                ctrl_wrd <= 6'b000100;
+                ctrl_wrd <= 6'b010100; //TODO check validity of s_reg_imm_ALU_B for all types
             R: 
-                ctrl_wrd <= 6'b010100;
+                ctrl_wrd <= 6'b000100;
             B:
                 ctrl_wrd <= 6'b100000;
              
