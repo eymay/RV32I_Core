@@ -21,13 +21,13 @@ module FunctionUnit (
     AND = 4'b1110;
 
     ALU_LL alu(.G_sel(FS), .A(A), .B(B), .G(ALU_result), .ZCNVFlags(ZCNVFlags));
-    shifter s(.S({FS[3], FS[0]}), .shift(A), .B(B), .H(Shift_result));
+    shifter s(.S({FS[3], FS[0]}), .shift(B), .B(A), .H(Shift_result));
 
     always @(*) begin
         case (FS)
             ADD, SUB, XOR, OR, AND:
                 S = ALU_result;
-            SLL, SRL,SRA:
+            SLL, SRL, SRA:
                 S = Shift_result;
             SLT:
                 S = (A_signed < B_signed) ? 1:0;
