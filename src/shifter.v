@@ -11,9 +11,9 @@ module shifter (
 	parameter SLL = 2'b00;
 	parameter SRL = 2'b10;
 	parameter SRA = 2'b11;
-	reg reg_IR;
-	reg [31:0] reg_B;
-	wire [31:0] reg_H;
+	reg reg_IR = 0;
+	reg [31:0] reg_B = 0;
+	wire [31:0] reg_H = 0;
 	shift_right #(.data_length(32)) sr(
 		.IR(reg_IR),
 		.shift(shift),
@@ -23,6 +23,7 @@ module shifter (
 	always @(*) begin : instruction_select
 		case (S)
 			SLL: begin
+                //TODO shift left is broken 
 				reg_IR = 1'b0;
 				begin : sv2v_autoblock_1
 					reg [31:0] _sv2v_strm_26DCB_inp;
@@ -53,6 +54,12 @@ module shifter (
 				reg_B = B;
 				H = reg_H;
 			end
+            default: begin
+                reg_IR = 1'b0;
+                reg_B = 0;
+                H = 0;
+            end
+        
 		endcase
 	end
 endmodule
