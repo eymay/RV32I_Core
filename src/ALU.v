@@ -26,8 +26,8 @@ module ALU (
         ADD: G = A + B;
         SUB: G = A - B;
         SLL: G = A << B;
-        SLT: G = (A_signed > B_signed) ? 1:0;
-        SLTU: G = (A > B) ? 1:0;
+        SLT: G = (A_signed < B_signed) ? 1:0;
+        SLTU: G = (A < B) ? 1:0;
         XOR: G = A^B;
         OR: G= A|B;
         AND: G = A&B; 
