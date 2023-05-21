@@ -3,3 +3,5 @@ test/cocotb/sim_build/*
 test/cocotb/__pycache__/*
 test/cocotb/results.xml
 test/cocotb/*.fst
+*.elf
+*.xml
