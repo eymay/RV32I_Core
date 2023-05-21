@@ -7,7 +7,7 @@ module immed_gen (
     always @(*) begin
         case (select)
             2'b00:
-                immediate = {{20{field[24]}},field[24:12]};
+                immediate = {{20{field[24]}},field[24:13]};
             2'b11:
                 immediate = {{19{field[0]}}, field[24], field[0], field[22:17], field[4:1], 1'b0};
             2'b01:
