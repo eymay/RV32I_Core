@@ -1,14 +1,16 @@
 
 
-module immed_gen (instType, inst, imm);
+module immed_gen (cword, inst, imm);
 
-input wire [3:0] instType;
+input wire [22:0] cword;
 input wire [31:0] inst;
 output reg [31:0] imm;
 
+`define instType cword[3:0]
+
 // TODO: not tested
 always @(*) begin
-    case (instType)
+    case (`instType)
 
         // lui & auipc
         4'd4, 4'd5:         imm <= {inst[31:12], {12{1'b0}}};

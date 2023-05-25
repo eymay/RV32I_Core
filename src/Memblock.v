@@ -47,14 +47,6 @@ module Memblock (clk, rst, rd_addr0, wr_addr0, wr_din0, we0, rd_dout0 );
     // currently rd_dout0 is a reg, but this could be changed to wire & some 'and' logic.
        assign rd_dout0 = mem[rd_addr0];
 
-    // prints content of all addresses
-    task automatic printAll;
-        $display("Content of memory unit (width=%0d, depth=%0d, time=%0d):", WIDTH, DEPTH, $time);
-        for (integer i = 0; i<DEPTH; i=i+1) begin
-            $display("addr %7d: data %32b", i, mem[i]);
-        end
-    endtask
-
 
 
 endmodule

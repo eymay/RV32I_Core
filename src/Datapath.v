@@ -1,17 +1,23 @@
 
 // iverilog -g2005-sv Datapath.sv hw6/FunctionUnit.v hw5/Datamemory.sv hw5/Regfile.v
 
-module Datapath (clk, rst, instType, fun3, rd, rs1, rs2, fun7, pc, imm);
+module Datapath (clk, rst, cword, pc, imm, r_for_pc);
 
 // control word
-input wire [3:0] instType;
-input wire [2:0] fun3;
-input wire fun7;
-input wire [4:0] rd, rs1, rs2;
+
+input wire [22:0] cword;
+
+`define instType cword[3:0]
+`define fun3 cword[6:4]
+`define fun7 cword[7]
+`define rd cword[12:8]
+`define rs1 cword[17:13]
+`define rs2 cword[22:18]
 
 // other stuff from control unit
 input wire [31:0] pc;
 input wire [31:0] imm;
+output wire [31:0] r_for_pc;
 
 // parts of function unit
 reg [31:0] funit_A;
@@ -43,6 +49,8 @@ FunctionUnit funit (.A(funit_A), .B(funit_B), .FS(funit_FS), .S(funit_S), .ZCNVF
 data_mem datamem (.clk(clk), .rst(rst), .rd_addr0(datamem_rd_addr0), .wr_addr0(datamem_wr_addr0), .wr_din0(datamem_wr_din0), .we0(datamem_we0), .rd_dout0(datamem_rd_dout0), .wr_strb(datamem_wr_strb));
 regfile regfile (.clk(clk), .rst(rst), .rd_addr0(regfile_rd_addr0), .rd_addr1(regfile_rd_addr1), .wr_addr0(regfile_wr_addr0), .wr_din0(regfile_wr_din0), .we0(regfile_we0), .rd_dout0(regfile_rd_dout0), .rd_dout1(regfile_rd_dout1));
 
+assign r_for_pc = regfile_rd_dout0;
+
 initial begin
     funit_A = 0;
     funit_B = 0;
@@ -63,7 +71,7 @@ end
 always @(posedge clk or negedge rst) {
 
     // funit bindings
-    case (instType)
+    case (`instType)
         // jal, jalr, auipc
         4'd8, 4'd7, 4'd5: funit_A <= pc;
         // load, imm, store, reg, lui, brnch
@@ -71,7 +79,7 @@ always @(posedge clk or negedge rst) {
         default: funit_A <= -1; // this should never happen
     endcase
 
-    case (instType)
+    case (`instType)
         // reg
         4'd3: funit_B <= regfile_rd_dout1;
         // store, load, auipc, lui, imm
@@ -83,19 +91,19 @@ always @(posedge clk or negedge rst) {
         default: funit_B <= -1; // this should never happen
     endcase
 
-    funit_FS <= {fun3, fun7};
+    funit_FS <= {`fun3, `fun7};
 
     // datamem bindings
 
     // if store
-    if (instType == 4'd2) datamem_we0 <= 1;
+    if (`instType == 4'd2) datamem_we0 <= 1;
     else datamem_we0 <= 0;
 
     datamem_rd_addr0 <= funit_S[31:2]; // TODO: test this :2 part
     datamem_wr_addr0 <= funit_S[31:2];
     datamem_wr_din0 <= regfile_rd_dout1;
 
-    case (fun3)
+    case (`fun3)
         // store word
         3'b010: datamem_wr_strb <= 3'b000;
         // store half
@@ -105,7 +113,7 @@ always @(posedge clk or negedge rst) {
     endcase
 
     // TODO: not tested
-    case (fun3)
+    case (`fun3)
         // LW
         3'b010: datamem_out <= datamem_rd_dout0;
         // LHU
@@ -147,7 +155,7 @@ always @(posedge clk or negedge rst) {
     regfile_rd_addr1 <= rs2;
     regfile_wr_addr0 <= rd;
     
-    case (instType)
+    case (`instType)
         // reg, imm, auipc, jal, jalr
         4'd3, 4'd1, 4'd5, 4'd7, 4'd8: regfile_wr_din0 <= funit_S;
         // load
@@ -157,7 +165,7 @@ always @(posedge clk or negedge rst) {
         default: regfile_wr_din0 <= -1;
     endcase
 
-    case (instType)
+    case (`instType)
         // branch, store
         4'd6, 4'd2: regfile_we0 <= 1'b0;
         default: regfile_we0 <= 1'b1;

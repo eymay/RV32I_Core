@@ -1,12 +1,16 @@
 
+// iverilog src/pc_updater.v src/ripple_carry_adder_subtractor.v src/full_adder_LL_nodelay.v 
 
-module pc_updater (t, imm, r, clk, pc);
+module pc_updater (clk, cword, imm, r, pc);
 
-input wire [3:0] t;
 input wire [31:0] r;
 input wire [31:0] imm;
 input wire clk;
-output reg [31:0] pc;
+output wire [31:0] pc;
+
+input wire [22:0] cword;
+
+`define instType cword[3:0]
 
 reg [31:0] A, B;
 wire [31:0] S;
@@ -21,14 +25,14 @@ initial begin
 end
 
 always @(posedge clk) begin
-    if (t == 4'd7) begin // if jalr
+    if (`instType == 4'd7) begin // if jalr
         A <= r;
     end
     else begin
         A <= pc;
     end
 
-    if (t==4'd6 || t==4'd8 || t==4'd7 || t==4'd5 ) begin // if branch, jal, jalr, auipc
+    if (`instType==4'd6 || `instType==4'd8 || `instType==4'd7 || `instType==4'd5 ) begin // if branch, jal, jalr, auipc
         B <= imm;
     end
     else begin
