@@ -1,17 +1,31 @@
-module immed_gen (
-    input [24:0] field,
-    input [1:0]select,
-    output reg [31:0] immediate
-);
-    //select[1:0] is opcode[6:5]
-    always @(*) begin
-        case (select)
-            2'b00:
-                immediate = {{20{field[24]}},field[24:13]};
-            2'b11:
-                immediate = {{19{field[0]}}, field[24], field[0], field[22:17], field[4:1], 1'b0};
-            2'b01:
-                immediate = {{20{field[24]}}, field[24:17], field[4:0]};
-        endcase
-    end
+
+
+module immed_gen (t, inst, imm);
+
+input wire [3:0] t;
+input wire [31:0] inst;
+output reg [31:0] imm;
+
+// TODO: not tested
+always @(*) begin
+    case (t)
+
+        // lui & auipc
+        4'd4, 4'd5:         imm <= {inst[31:12], {12{1'b0}}};
+        // jal
+        4'd8:               imm <= {{12{inst[31]}},  inst[19:12], inst[20], inst[30:21], 1'b0};
+        // brnch
+        4'd6:               imm <= {{20{inst[31]}},  inst[7], inst[30:25], inst[11:8], 1'b0};
+        // store
+        4'd2:               imm <= {{21{inst[31]}},  inst[30:25], inst[11:7]};
+        // load, imm, jalr
+        4'd0, 4'd1, 4'd7:   imm <= {{21{inst[31]}},  inst[30:20]};
+
+        default:            imm <= 32'b1;
+    endcase
+end
+
 endmodule
+
+// load, imm, store, reg, lui, auipc, brnch, jalr, jal
+// 0     1    2      3    4    5      6      7     8

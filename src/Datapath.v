@@ -1,40 +1,88 @@
-module Datapath (
-    input clk,
-    input rst,
-    input [3:0] FS, //{o_instruction_mem[14:12], o_instruction_mem[30]}
-    input [2:0] CW4_2,  //{s_reg_imm_ALU_B, s_ALU_dmem_wregdata, sig_w_ctrl_reg}
-    input [31:0] o_imm,
-    input [31:0] o_data_mem,
-    input [4:0] r_addr_reg1, //o_instruction_mem[19:15]
-    input [4:0] r_addr_reg2, //o_instruction_mem[24:20]
-    input [4:0] w_addr_reg,  //o_instruction_mem[11:7]
-    output [31:0] o_ALU,
-    output [3:0] ZCNV,
-    output [31:0] o_regfile_rreg2
-);
 
-wire s_reg_imm_ALU_B;
-wire s_ALU_dmem_wregdata;
-wire sig_w_ctrl_reg;
+// iverilog -g2005-sv Datapath.sv hw6/FunctionUnit.v hw5/Datamemory.sv hw5/Regfile.v
 
-assign {s_reg_imm_ALU_B, s_ALU_dmem_wregdata, sig_w_ctrl_reg} = CW4_2;
+module Datapath (clk, rst, instType, fun3, rd, rs1, rs2, fun7, pc, imm);
+
+// control word
+input wire [3:0] instType;
+input wire [2:0] fun3;
+input wire fun7;
+input wire [4:0] rd, rs1, rs2;
+
+// other stuff from control unit
+input wire [31:0] pc;
+input wire [31:0] imm;
+
+// parts of function unit
+reg [31:0] funit_A;
+reg [31:0] funit_B;
+reg [3:0] funit_FS;
+wire [3:0] funit_ZCNVFlags;
+wire [31:0] funit_S;
+
+// parts of datamem
+reg datamem_we0;
+reg [6:0] datamem_rd_addr0;
+wire [31:0] datamem_rd_dout0;
+reg [6:0] datamem_wr_addr0; // note: this value selects the word, not the byte. wr_addr0=1 -> risc-v addresses 4,5,6,7
+reg [31:0] datamem_wr_din0;
+reg [2:0] datamem_wr_strb;
+
+// parts of regfile
+reg regfile_we0;
+reg [4:0] regfile_rd_addr0;
+wire [31:0] regfile_rd_dout0; // rs1
+reg [4:0] regfile_rd_addr1;
+wire [31:0] regfile_rd_dout1;  // rs2
+reg [4:0] regfile_wr_addr0;
+reg [31:0] regfile_wr_din0;
 
 
-wire [31:0] o_regfile_rreg1;
-wire [31:0] i_ALU_B;
-wire [31:0] i_regfile_wdata;
+FunctionUnit funit (.A(funit_A), .B(funit_B), .FS(funit_FS), .S(funit_S), .ZCNVFlags(funit_ZCNVFlags)  );
+data_mem datamem (.clk(clk), .rst(rst), .rd_addr0(datamem_rd_addr0), .wr_addr0(datamem_wr_addr0), .wr_din0(datamem_wr_din0), .we0(datamem_we0), .rd_dout0(datamem_rd_dout0), .wr_strb(datamem_wr_strb));
+regfile regfile (.clk(clk), .rst(rst), .rd_addr0(regfile_rd_addr0), .rd_addr1(regfile_rd_addr1), .wr_addr0(regfile_wr_addr0), .wr_din0(regfile_wr_din0), .we0(regfile_we0), .rd_dout0(regfile_rd_dout0), .rd_dout1(regfile_rd_dout1));
 
-FunctionUnit ALU(.FS(FS), .A(o_regfile_rreg1), .B(i_ALU_B), .S(o_ALU), .ZCNVFlags(ZCNV));
+initial begin
+    funit_A = 0;
+    funit_B = 0;
+    funit_FS = 0;
+    datamem_we0 = 0;
+    datamem_rd_addr0 = 0;
+    datamem_wr_addr0 = 0;
+    datamem_wr_din0 = 0;
+    datamem_wr_strb = 0;
+    regfile_we0 = 0;
+    regfile_rd_addr0 = 0;
+    regfile_rd_addr1 = 0;
+    regfile_wr_addr0 = 0;
+    regfile_wr_din0 = 0;
+end
 
-n_bit_mux #(.N(32)) ALU_B_select (
-    .s(s_reg_imm_ALU_B), .i_n_mux_x(o_regfile_rreg2), .i_n_mux_y(o_imm), .o_n_mux(i_ALU_B));
+// TODO: rst not implemented yet
+always @(posedge clk) {
+    case (instType)
+        // jal, jalr, auipc
+        4'd8, 4'd7, 4'd5: funit_A <= pc;
+        // load, imm, store, reg, lui, brnch
+        4'd0, 4'd1, 4'd2, 4'd3, 4'd4, 4'd6: funit_A <= regfile_rd_dout0;
+        default: funit_A <= -1; // this should never happen
+    endcase
 
-n_bit_mux #(.N(32)) wdata_reg_select(
-    .s(s_ALU_dmem_wregdata), .i_n_mux_x(o_ALU), .i_n_mux_y(o_data_mem), .o_n_mux(i_regfile_wdata)
-);
-regfile regfile(.clk(clk), .rst(rst), 
-    .r_addr_reg1(r_addr_reg1), .r_addr_reg2(r_addr_reg2),
-    .w_addr_reg(w_addr_reg), .w_data_reg(i_regfile_wdata), 
-    .w_ctrl_reg(sig_w_ctrl_reg), .r_data_reg1(o_regfile_rreg1), .r_data_reg2(o_regfile_rreg2));
+    case (instType)
+        // reg
+        4'd3: funit_B <= regfile_rd_dout1;
+        // store, load, auipc, lui, imm
+        4'd2, 4'd0, 4'd5, 4'd4, 4'd1: funit_B <= imm;
+        // jal, jalr
+        4'd7, 4'd8: funit_B <= 4;
+        // brnch
+        4'd6: funit_B <= -2; // this is not going to be used anyway
+        default: funit_B <= -1; // this should never happen
+    endcase
+}
 
 endmodule
+
+
+// load, imm, store, reg, lui, auipc, brnch, jalr, jal
+// 0     1    2      3    4    5      6      7     8
