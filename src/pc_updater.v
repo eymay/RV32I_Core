@@ -1,8 +1,6 @@
 
-// iverilog -g2005-sv PcUpdater.sv hw6/ripple_carry_adder_subtractor.v hw6/full_adder_LL_nodelay.v
 
-
-module PcUpdater (t, imm, r, clk, pc);
+module pc_updater (t, imm, r, clk, pc);
 
 input wire [3:0] t;
 input wire [31:0] r;

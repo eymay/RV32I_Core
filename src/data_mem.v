@@ -2,7 +2,7 @@
 
 
 
-module Datamemory (clk, rst, rd_addr0, wr_addr0, wr_din0, we0, rd_dout0, wr_strb);
+module data_mem (clk, rst, rd_addr0, wr_addr0, wr_din0, we0, rd_dout0, wr_strb);
     parameter DEPTH=128;
     // note: we remove WIDTH as a parameter and give it a fixed 32 bit value, because it's integral in the logic
     // of the memory how it should respond to storing bytes and halfwords.

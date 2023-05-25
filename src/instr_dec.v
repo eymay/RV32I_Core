@@ -1,5 +1,5 @@
 
-module InstDecoder ( inst, instType, fun3, rd, rs1, rs2, fun7);
+module instr_dec ( inst, instType, fun3, rd, rs1, rs2, fun7);
 
 input wire [31:0] inst;
 output reg [3:0] instType;

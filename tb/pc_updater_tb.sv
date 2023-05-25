@@ -1,5 +1,5 @@
 
-module PcUpdaterTest ();
+module pc_updater_tb ();
 
 reg [3:0] t;
 reg [31:0] r;
@@ -7,7 +7,7 @@ reg [31:0] imm;
 reg clk;
 wire [31:0] pc;
 
-PcUpdater u1 (t, imm, r, clk, pc);
+pc_updater u1 (t, imm, r, clk, pc);
 
 
 initial begin

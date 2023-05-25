@@ -1,6 +1,6 @@
 // `define DEBUG_MEM
 
-module Regfile (clk, rst, rd_addr0, rd_addr1, wr_addr0, wr_din0, we0, rd_dout0, rd_dout1 );
+module regfile (clk, rst, rd_addr0, rd_addr1, wr_addr0, wr_din0, we0, rd_dout0, rd_dout1 );
     parameter WIDTH=32, DEPTH=32;
 
     input wire clk, rst, we0;

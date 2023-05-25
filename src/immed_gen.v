@@ -1,6 +1,6 @@
 
 
-module ImmedGenerator (t, inst, imm);
+module immed_gen (t, inst, imm);
 
 input wire [3:0] t;
 input wire [31:0] inst;
