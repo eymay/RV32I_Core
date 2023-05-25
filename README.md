@@ -5,6 +5,19 @@ For testing infrastructure
 2. Install cocotb
 `pip3 install cocotb`
 
+# Hierarchy
+
+```mermaid
+  graph TD;
+      CPU-->CU;
+      CPU-->DP;
+      CU-->IG;
+      CU-->ID;
+      CU-->PCU;
+      DP-->FU;
+      DP-->DM;
+      DP-->RF;
+```
 
 # RV32I Core
 
