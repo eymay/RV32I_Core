@@ -1,46 +1,48 @@
-module regfile #(
-    register_count = 32, data_length = 32
-) (
-    input clk, rst,
-    input [$clog2(register_count) - 1: 0] r_addr_reg1,
-    input [$clog2(register_count) - 1: 0] r_addr_reg2,
-    input [$clog2(register_count) - 1: 0] w_addr_reg,
-    input [data_length - 1: 0] w_data_reg,
-    input w_ctrl_reg,
-    output reg [data_length -1:0] r_data_reg1,
-    output reg [data_length -1:0] r_data_reg2
-);
-    /*
-    wire [register_count - 1:0]  enable;
-    wire [data_length - 1:0] Q [register_count - 1:0]; 
+// `define DEBUG_MEM
 
-    genvar i;
-    generate
-    for (i = 0;i < register_count ; i = i +1) begin
-        n_bit_register #(.N(data_length)) register(
-            .clk(clk), .rst(rst), .En(enable[i]), .D(w_data_reg), .Q(Q[i]));
+module Regfile (clk, rst, rd_addr0, rd_addr1, wr_addr0, wr_din0, we0, rd_dout0, rd_dout1 );
+    parameter WIDTH=32, DEPTH=32;
+
+    input wire clk, rst, we0;
+    // read port 0
+    input wire [$clog2(DEPTH)-1:0] rd_addr0;
+    output [WIDTH-1:0] rd_dout0; /// TODO DONE: made wire
+
+    // read port 1
+    input wire [$clog2(DEPTH)-1:0] rd_addr1;
+    output [WIDTH-1:0] rd_dout1; 
+    
+    // write port 0
+    input wire [$clog2(DEPTH)-1:0] wr_addr0;
+    input wire [WIDTH-1:0] wr_din0;
+
+    reg [WIDTH-1:0] mem [0:DEPTH-1];
+
+
+    // write functionality. writes synchronously, on rising edge of clk.
+    always @(posedge clk) begin
+       if (we0 && rst && wr_addr0) begin
+            mem[wr_addr0] = wr_din0;
+        end
     end
-    endgenerate
 
-    param_decoder #(.input_length(5)) dec(.en_dec(w_ctrl_reg), .i_dec(w_addr_reg), .o_dec(enable));
-
-    param_mux #(.input_length(32), .X_to_1(32)) muxreg1(.i_mux(Q), .en_mux(1'b1),.select(r_addr_reg1), .o_mux(r_data_reg1));
-    param_mux #(.input_length(32), .X_to_1(32)) muxreg2(.i_mux(Q), .en_mux(1'b1), .select(r_addr_reg2), .o_mux(r_data_reg2));
-    */
-    reg [data_length - 1:0] regs [register_count - 1:0]; 
-
-`ifdef COCOTB_SIM
-    initial $readmemh("../../src/regfile_mem.mem", regs);
-`endif
+    // reset is async, works immediately. rst=0 means reset.
     always @(*) begin
-        r_data_reg1 = regs[r_addr_reg1];
-        r_data_reg2 = regs[r_addr_reg2];
+        if (!rst) begin
+            for (integer i = 1; i<DEPTH; i=i+1) begin
+                mem[i] = {WIDTH{1'b0}};
+            end
+        end
+      mem[0] = {WIDTH{1'b0}};
     end
 
-    always @(posedge clk ) begin
-        if(w_ctrl_reg)
-            regs[w_addr_reg] <= w_data_reg;
-    end
-
+    // read functionality. reads asynchronously.
+       assign rd_dout0 = mem[rd_addr0];
+       assign rd_dout1 = mem[rd_addr1];
 
 endmodule
+
+
+
+
+

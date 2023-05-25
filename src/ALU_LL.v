@@ -8,6 +8,8 @@ module ALU_LL (
     //reg carry_in;
     wire carry_out;
     wire [31:0] Arithmetic_result, Logical_result;
+    
+    //TODO new adder topology needed
     ripple_carry_adder_subtractor #(.N(32)) rcas(.A(A), .B(B), .Cin(G_sel[0]),
      .Cout(ZCNVFlags[2]), .S(Arithmetic_result));
 
