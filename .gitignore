@@ -9,3 +9,4 @@ test/cocotb/*.fst
 *.xml
 
 *.vvp
+*.out
