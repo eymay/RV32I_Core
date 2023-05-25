@@ -1,17 +1,19 @@
 
 module pc_updater_tb ();
 
-reg [3:0] t;
+pc_updater u1 (clk, cword, imm, r, pc);
+
 reg [31:0] r;
 reg [31:0] imm;
 reg clk;
 wire [31:0] pc;
+reg [22:0] cword;
 
-pc_updater u1 (t, imm, r, clk, pc);
+`define instType cword[3:0]
 
 
 initial begin
-    t=7;
+    `instType=0;
     r=9;
     imm=15;
     clk=0;

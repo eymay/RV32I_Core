@@ -6,7 +6,7 @@ input wire clk, rst;
 
 input wire [31:0] r_for_pc;
 output wire [22:0] cword;
-output wire [31:0] inst;
+input wire [31:0] inst;
 output wire [31:0] imm;
 output wire [31:0] pc;
 
