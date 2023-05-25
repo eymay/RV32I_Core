@@ -1,7 +1,4 @@
 // `define DEBUG_MEM
-
-
-
 module Memblock (clk, rst, rd_addr0, wr_addr0, wr_din0, we0, rd_dout0 );
     parameter WIDTH=1, DEPTH=1;
 
