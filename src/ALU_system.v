@@ -49,7 +49,7 @@ module ALU_system (
          .w_data_mem(o_regfile_rreg2), .r_ctrl_mem(sig_r_ctrl_data_mem),
          .w_ctrl_mem(sig_w_ctrl_data_mem), .r_data_mem(o_data_mem));
 
-    control_unit cu(.clk(clk), .type_select(o_instruction_mem[6:4]), 
+    control_unit cu(.clk(clk), .type_select(o_instruction_mem[6:2]), 
     .ctrl_wrd({s_inc_imm_i_PC, s_reg_imm_ALU_B, s_ALU_dmem_wregdata,
      sig_w_ctrl_reg,  sig_r_ctrl_data_mem,  sig_w_ctrl_data_mem}));
 

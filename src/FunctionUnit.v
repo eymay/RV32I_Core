@@ -21,7 +21,7 @@ module FunctionUnit (
     AND = 4'b1110;
 
     ALU_LL alu(.G_sel(FS), .A(A), .B(B), .G(ALU_result), .ZCNVFlags(ZCNVFlags));
-    shifter s(.S({FS[3], FS[0]}), .shift(B), .B(A), .H(Shift_result));
+    shifter s(.S({FS[3], FS[0]}), .shift(B[4:0]), .B(A), .H(Shift_result));
 
     always @(*) begin
         case (FS)

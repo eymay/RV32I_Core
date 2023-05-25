@@ -20,18 +20,18 @@ module data_mem #(
     end
     endgenerate
     */
-    reg [data_length - 1:0] data_mem [register_count - 1:0];
+    reg [data_length - 1:0] dmem [register_count - 1:0];
 `ifdef COCOTB_SIM
-    initial $readmemh("../../src/data_mem.mem", data_mem);
+    initial $readmemh("../../src/data_mem.mem", dmem);
 `endif
 
     always @(*) begin
-        r_data_mem = r_ctrl_mem && data_mem[rw_addr_mem];
+        r_data_mem = r_ctrl_mem && dmem[rw_addr_mem];
     end
 
     always @(posedge clk ) begin
         if(w_ctrl_mem)
-            data_mem[rw_addr_mem] <= w_data_mem;
+            dmem[rw_addr_mem] <= w_data_mem;
     end
     
 
