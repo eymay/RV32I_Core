@@ -4,7 +4,7 @@
 module Datapath (clk, rst, cword, pc, imm, r_for_pc);
 
 // control word
-
+input wire clk, rst;
 input wire [22:0] cword;
 
 `define instType cword[3:0]
