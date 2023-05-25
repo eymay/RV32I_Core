@@ -35,9 +35,6 @@ class mem_type:
     def set_memref(self):
         self.mem = self.dut.data_mem.dmem[self.byte_addr]
 
-    def set_mem(self, val):
-        self.mem.value = val
-
 
 class load_type(mem_type):
     def __init__(self, dut, rd, rs1, offset, len, opstring):
@@ -49,6 +46,7 @@ class load_type(mem_type):
                 "x{}".format(rd),
                 str(offset) + "(x{})".format(rs1),
                 "")
+        self.zero_extend = False if opstring[-1] == 'u' else True #zero or sign extend
 
     def get_value(self):
         print("mem:", self.mem)
@@ -59,6 +57,50 @@ class load_type(mem_type):
         self.get_value()
         assert self.rd.value == self.transf_value , "Loaded value not correct {}!={}".format(self.rd.value, self.transf_value)
 
+
+def store_type(mem_type):
+     def __init__(self, dut, rs1, rs2, offset, len, opstring):
+        super().__init__(dut, rs1, offset, len, opstring)
+        self.rs2_idx = rs2
+        self.rs2 = dut.dp.regfile.regs[rs2]
+        self.instr = Instruction(
+                opstring, 
+                "x{}".format(rs2),
+                str(offset) + "(x{})".format(rs1),
+                "")
+
+    def get_value(self):
+        self.transf_value = self.rs2.value
+        print("reg:", self.transf_value )
+        print("reg buff:", self.transf_value.buff)
+
+    def check_mem(self):
+        self.get_value()
+        assert self.mem.value == self.transf_value , "Stored value not correct {}!={}".format(self.mem.value, self.transf_value)
+
+async def generic_store_test(dut, len, opstring, debug = False):
+    await initialize(dut)
+    rs1 = 1
+    rs2 = 2
+    offset = 4
+    addr = 4
+
+    instr_obj = store_type(dut, rd, rs1, offset,len, opstring)
+    instr_obj.set_rs1(5)
+    instr_obj.set_memref()
+    set_instruction(instr_obj, dut, addr)
+
+    #debug_instr(dut, addr)
+
+    await FallingEdge(dut.clk)
+    if(debug):
+        dbg.debug_signals(dut, addr)
+    #debug_shifter(dut)
+    instr_obj.check_rd()
+
+    #debug_instr(dut, addr)
+
+    dut.PC.Q.value = 4
 
 async def generic_load_test(dut, len, opstring, debug = False):
     await initialize(dut)
@@ -83,7 +125,6 @@ async def generic_load_test(dut, len, opstring, debug = False):
     #debug_instr(dut, addr)
 
     dut.PC.Q.value = 4
-
 
 @cocotb.test()
 async def lw_test(dut):
