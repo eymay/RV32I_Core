@@ -1,7 +1,8 @@
 
-module cpu (
-    input clk,
-    input rst);
+module cpu (clk,rst);
+
+input wire clk;
+input wire rst;
 
 wire [31:0] r_for_pc;
 wire [22:0] cword;

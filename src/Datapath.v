@@ -170,9 +170,9 @@ always @(posedge clk or negedge rst) begin
 
     // regfile bindings
 
-    regfile_rd_addr0 <= rs1;
-    regfile_rd_addr1 <= rs2;
-    regfile_wr_addr0 <= rd;
+    regfile_rd_addr0 <= `rs1;
+    regfile_rd_addr1 <= `rs2;
+    regfile_wr_addr0 <= `rd;
     
     case (`instType)
         // reg, imm, auipc, jal, jalr
