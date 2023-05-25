@@ -13,7 +13,7 @@ from cocotb.triggers import FallingEdge, Timer
 class mem_type:
     def __init__(self, dut, rs1, offset, len, opstring):
         self.rs1_idx = rs1
-        self.rs1 = dut.dp.regfile.regs[rs1]
+        self.rs1 = dut.dp.regfile.mem[rs1]
         self.offset = offset
         self.byte_addr = 0
         self.transf_value = 0
@@ -40,7 +40,7 @@ class load_type(mem_type):
     def __init__(self, dut, rd, rs1, offset, len, opstring):
         super().__init__(dut, rs1, offset, len, opstring)
         self.rd_idx = rd
-        self.rd = dut.dp.regfile.regs[rd]
+        self.rd = dut.dp.regfile.mem[rd]
         self.instr = Instruction(
                 opstring, 
                 "x{}".format(rd),
@@ -62,7 +62,7 @@ def store_type(mem_type):
      def __init__(self, dut, rs1, rs2, offset, len, opstring):
         super().__init__(dut, rs1, offset, len, opstring)
         self.rs2_idx = rs2
-        self.rs2 = dut.dp.regfile.regs[rs2]
+        self.rs2 = dut.dp.regfile.mem[rs2]
         self.instr = Instruction(
                 opstring, 
                 "x{}".format(rs2),

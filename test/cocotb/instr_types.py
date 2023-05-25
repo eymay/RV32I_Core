@@ -42,8 +42,8 @@ class Alu_type:
     def __init__(self, dut, rd, rs1,  op, opstring):
         self.rd_idx = rd
         self.rs1_idx = rs1
-        self.rd = dut.dp.regfile.regs[rd]
-        self.rs1 = dut.dp.regfile.regs[rs1]
+        self.rd = dut.dp.regfile.mem[rd]
+        self.rs1 = dut.dp.regfile.mem[rs1]
         self.op = op
         self.ideal_result = 0
         self.ideal_operand1 = 0
@@ -80,7 +80,7 @@ class Alu_rr(Alu_type):
     def __init__(self, dut, rd, rs1, rs2, op, opstring):
         super().__init__(dut, rd, rs1, op, opstring)
         self.rs2_idx = rs2
-        self.rs2 = dut.dp.regfile.regs[rs2]
+        self.rs2 = dut.dp.regfile.mem[rs2]
         self.instr = Instruction(
                 opstring, 
                 "x{}".format(rd),
