@@ -21,22 +21,18 @@ module FunctionUnit (
     AND = 4'b1110;
 
     ALU_LL alu(.G_sel(FS), .A(A), .B(B), .G(ALU_result), .ZCNVFlags(ZCNVFlags));
-    shifter s(.S({FS[3], FS[0]}), .shift(A), .B(B), .H(Shift_result));
+    shifter s(.S({FS[3], FS[0]}), .shift(B[4:0]), .B(A), .H(Shift_result));
 
     always @(*) begin
         case (FS)
             ADD, SUB, XOR, OR, AND:
                 S = ALU_result;
-            SLL, SRL,SRA:
+            SLL, SRL, SRA:
                 S = Shift_result;
-            //TODO 1.a "Note that you can make number comparison
-            //by subtracting the numbers and evaluating carry and 
-            //overflow."
-            //We should implement the following in low level as stated
             SLT:
-                S = (A_signed > B_signed) ? 1:0;
+                S = (A_signed < B_signed) ? 1:0;
             SLTU:
-                S = (A > B) ? 1:0;
+                S = (A < B) ? 1:0;
 
         endcase
     end

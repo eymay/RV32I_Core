@@ -45,9 +45,29 @@ reg [4:0] regfile_wr_addr0;
 reg [31:0] regfile_wr_din0;
 
 
-FunctionUnit funit (.A(funit_A), .B(funit_B), .FS(funit_FS), .S(funit_S), .ZCNVFlags(funit_ZCNVFlags)  );
-data_mem datamem (.clk(clk), .rst(rst), .rd_addr0(datamem_rd_addr0), .wr_addr0(datamem_wr_addr0), .wr_din0(datamem_wr_din0), .we0(datamem_we0), .rd_dout0(datamem_rd_dout0), .wr_strb(datamem_wr_strb));
-regfile regfile (.clk(clk), .rst(rst), .rd_addr0(regfile_rd_addr0), .rd_addr1(regfile_rd_addr1), .wr_addr0(regfile_wr_addr0), .wr_din0(regfile_wr_din0), .we0(regfile_we0), .rd_dout0(regfile_rd_dout0), .rd_dout1(regfile_rd_dout1));
+FunctionUnit funit (
+    .A(funit_A), .B(funit_B), .FS(funit_FS), .S(funit_S), .ZCNVFlags(funit_ZCNVFlags) );
+
+data_mem datamem (
+    .clk(clk),
+    .rst(rst),
+    .rd_addr0(datamem_rd_addr0),
+    .wr_addr0(datamem_wr_addr0),
+    .wr_din0(datamem_wr_din0),
+    .we0(datamem_we0),
+    .rd_dout0(datamem_rd_dout0),
+    .wr_strb(datamem_wr_strb));
+
+regfile regfile (
+    .clk(clk), 
+    .rst(rst),
+    .rd_addr0(regfile_rd_addr0),
+    .rd_addr1(regfile_rd_addr1), 
+    .wr_addr0(regfile_wr_addr0), 
+    .wr_din0(regfile_wr_din0), 
+    .we0(regfile_we0), 
+    .rd_dout0(regfile_rd_dout0),
+    .rd_dout1(regfile_rd_dout1));
 
 assign r_for_pc = regfile_rd_dout0;
 
@@ -67,8 +87,7 @@ initial begin
     regfile_wr_din0 = 0;
 end
 
-// TODO: rst not implemented yet
-always @(posedge clk or negedge rst) {
+always @(posedge clk or negedge rst) begin
 
     // funit bindings
     case (`instType)
@@ -171,7 +190,7 @@ always @(posedge clk or negedge rst) {
         default: regfile_we0 <= 1'b1;
     endcase
      
-}
+end
 
 endmodule
 

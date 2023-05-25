@@ -1,7 +1,11 @@
 sim_build/*
 test/cocotb/sim_build/*
 test/cocotb/__pycache__/*
-test/cocotb/results.xml
+test/__pycache__/*
 test/cocotb/*.fst
+
 *.elf
+
 *.xml
+
+*.vvp
