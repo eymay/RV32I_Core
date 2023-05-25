@@ -1,14 +1,14 @@
 
 
-module immed_gen (t, inst, imm);
+module immed_gen (instType, inst, imm);
 
-input wire [3:0] t;
+input wire [3:0] instType;
 input wire [31:0] inst;
 output reg [31:0] imm;
 
 // TODO: not tested
 always @(*) begin
-    case (t)
+    case (instType)
 
         // lui & auipc
         4'd4, 4'd5:         imm <= {inst[31:12], {12{1'b0}}};
