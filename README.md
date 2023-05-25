@@ -1,3 +1,11 @@
+# Getting Started
+For testing infrastructure
+1. Install llvm-14
+`sudo apt install llvm-14`
+2. Install cocotb
+`pip3 install cocotb`
+
+
 # RV32I Core
 
 ## Designing Control Word
