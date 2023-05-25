@@ -6,7 +6,7 @@ module pc_updater (clk, cword, imm, r, pc);
 input wire [31:0] r;
 input wire [31:0] imm;
 input wire clk;
-output wire [31:0] pc;
+output reg [31:0] pc;
 
 input wire [22:0] cword;
 
@@ -17,7 +17,6 @@ wire [31:0] S;
 wire Cout;
 
 ripple_carry_adder_subtractor adder ( .Cin(1'b0), .A(A), .B(B), .Cout(Cout), .S(S));
-assign pc = {S[31:2], 2'b0};
 
 initial begin
     A = 0;
@@ -38,6 +37,10 @@ always @(posedge clk) begin
     else begin
         B <= 32'd4; // compressed instructions are not supported
     end
+end
+
+always @(S) begin
+    pc = {S[31:2], 2'b0};
 end
 
 endmodule
