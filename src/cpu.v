@@ -25,7 +25,7 @@ Datapath dp (
     .pc(pc),
     .imm(imm),
     .r_for_pc(r_for_pc));
-instr_mem im (
+instr_mem instr_mem (
     .r_addr_imem(pc),
     .r_data_imem(inst));
 
