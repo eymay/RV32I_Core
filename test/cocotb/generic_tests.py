@@ -2,6 +2,7 @@ import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import FallingEdge, Timer
 
+import debug_utils as dbg
 from instr_types import Instruction, Alu_type, Alu_rr, Alu_ri
 
 
@@ -20,7 +21,7 @@ async def initialize(dut):
     dut.rst.value = 1
     await Timer(5, units="ns")
 
-async def generic_itype_test(dut, op, opstring, debug = False):
+async def generic_itype_test(dut, op, opstring, debug = True):
     await initialize(dut)
     rd = 1
     rs1 = 2
