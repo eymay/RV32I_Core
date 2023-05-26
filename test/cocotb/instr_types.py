@@ -104,9 +104,9 @@ class Alu_ri(Alu_type):
                 str(imm))
 
     def check_imm(self):
-        assert self.dut.dp.imm.value == self.imm, "Immediate produced is not correct {} != {}".format(self.dut.dp.imm.value, self.imm)
+        assert self.dut.imm.value == self.imm, "Immediate produced is not correct {} != {}".format(self.dut.imm.value, self.imm)
 
     def debug_imm(self):
-        print("Imm:", self.dut.dp.o_imm.value)
-        print("Immed Gen Field:", self.dut.immed_gen.field.value)
-        print("Immed Gen Select:", self.dut.immed_gen.select.value)
+        print("Imm:", self.dut.cu.immed_gen.value)
+        print("Immed Gen cword:", self.dut.cu.immed_gen.cword.value)
+        print("Immed Gen inst:", self.dut.cu.immed_gen.inst.value)

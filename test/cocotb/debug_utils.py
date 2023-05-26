@@ -8,7 +8,7 @@ def debug_instr(dut, addr):
 def debug_signals(dut, addr):
     for i in range(4):
         print(hex(dut.instr_mem.imem[addr+i].value))
-    print("PC:", hex(dut.o_PC.value))
+    print("PC:", hex(dut.cu.pc_updater.pc.value))
     print("Instr mem:", hex(dut.o_instruction_mem.value), dut.o_instruction_mem.value)
     print("Reg1:", dut.dp.regfile.mem[2].value)
     print("Reg2:", dut.dp.regfile.mem[4].value)
