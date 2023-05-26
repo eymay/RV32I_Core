@@ -26,27 +26,12 @@ module regfile (clk, rst, rd_addr0, rd_addr1, wr_addr0, wr_din0, we0, rd_dout0, 
         // note: stack ptr initially 20 for easier debugging
         // TODO: always check if it conflicts with asm code
         mem[2] = 20;
-        mem[8] = 12345678;
+        mem[8] = 12345678; // these are placeholders to demonstrate that callee-save works
         mem[9] = 11223344;
         mem[18] = 10203040;
         mem[10] = 10;
     end
 
-    // TODO: for debug only. remove later
-    wire [31:0] x2;
-    assign x2 = mem[2];
-    wire [31:0] x8;
-    assign x8 = mem[8];
-    wire [31:0] x9;
-    assign x9 = mem[9];
-    wire [31:0] x18;
-    assign x18 = mem[18];
-    wire [31:0] x15;
-    assign x15 = mem[15];
-    wire [31:0] x14;
-    assign x14 = mem[14];
-    wire [31:0] x10;
-    assign x10 = mem[10];
 
 
     // write functionality. writes synchronously, on rising edge of clk.

@@ -15,10 +15,10 @@ initial begin
     rst = 1;
 
     // exponentiation algorithm
-    // $readmemh("exponentiation.mem", `imem);
+    $readmemh("exponentiation.mem", `imem);
 
     // store load half byte test instructions
-    $readmemh("half_byte_test.mem", `imem);
+    //$readmemh("half_byte_test.mem", `imem);
 
     #750;
     $finish;
@@ -40,13 +40,13 @@ initial begin
         // These are for exponentiation algo testing
         // Here input is x10 (a0) and output is the same register
         // By t=600 the output is already calculated
-        // $display("reg%2d (sp) : %2d", 2, cpu.dp.regfile.mem[2]);
-        // $display("reg%2d (s0) : %2d", 8, cpu.dp.regfile.mem[8]);
-        // $display("reg%2d (s1) : %2d", 9, cpu.dp.regfile.mem[9]);
-        // $display("reg%2d (s2) : %2d", 18, cpu.dp.regfile.mem[18]);
-        // $display("reg%2d (a5) : %2d", 15, cpu.dp.regfile.mem[15]);
-        // $display("reg%2d (a4) : %2d", 14, cpu.dp.regfile.mem[14]);
-        // $display("reg%2d (a0) : %2d", 10, cpu.dp.regfile.mem[10]);
+        $display("reg%2d (sp) : %2d", 2, cpu.dp.regfile.mem[2]);
+        $display("reg%2d (s0) : %2d", 8, cpu.dp.regfile.mem[8]);
+        $display("reg%2d (s1) : %2d", 9, cpu.dp.regfile.mem[9]);
+        $display("reg%2d (s2) : %2d", 18, cpu.dp.regfile.mem[18]);
+        $display("reg%2d (a5) : %2d", 15, cpu.dp.regfile.mem[15]);
+        $display("reg%2d (a4) : %2d", 14, cpu.dp.regfile.mem[14]);
+        $display("reg%2d (a0) : %2d", 10, cpu.dp.regfile.mem[10]);
 
         // You can uncomment this to see the memory
         // This is not necessary because memory here
@@ -57,8 +57,9 @@ initial begin
         // end
 
 
-        $display("reg%2d (ra): %32b", 1, cpu.dp.regfile.mem[1]);
-        $display("adr%2d..%2d : %32b", 0, 3, cpu.datamem.mem[0]);
+        // Uncomment this is for the store/load word/half/byte test
+        // $display("reg%2d (ra): %32b", 1, cpu.dp.regfile.mem[1]);
+        // $display("adr%2d..%2d : %32b", 0, 3, cpu.datamem.mem[0]);
 
 
 

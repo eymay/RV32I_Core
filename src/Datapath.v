@@ -130,7 +130,6 @@ always @(*) begin
         3'b000: datamem_wr_strb <= {1'b1, imm[1:0]};
     endcase
 
-    // TODO: not tested
     case (`fun3)
         // LW
         3'b010: datamem_out <= datamem_rd_dout0;

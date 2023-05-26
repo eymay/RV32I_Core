@@ -34,17 +34,6 @@ module data_mem (clk, rst, rd_addr0, wr_addr0, wr_din0, we0, rd_dout0, wr_strb);
     end
 
 
-    // TODO: for debug only. remove later
-    wire [31:0] adr0;
-    assign adr0 = mem[0];
-    wire [31:0] adr4;
-    assign adr4 = mem[1];
-    wire [31:0] adr8;
-    assign adr8 = mem[2];
-    wire [31:0] adr12;
-    assign adr12 = mem[3];
-    wire [31:0] adr16;
-    assign adr16 = mem[4];
 
 
     // write functionality. writes synchronously, on rising edge of clk.
