@@ -1,0 +1,46 @@
+
+addi x1, zero, -50
+sb x1, 0(zero)
+sb x1, 1(zero)
+sb x1, 2(zero)
+sb x1, 3(zero)
+sh x1, 0(zero)
+sh x1, 2(zero)
+lw x1, 0(zero)
+lh x1, 0(zero)
+lh x1, 2(zero)
+lhu x1, 0(zero)
+lhu x1, 2(zero)
+lb x1, 0(zero)
+lb x1, 1(zero)
+lb x1, 2(zero)
+lb x1, 3(zero)
+lbu x1, 0(zero)
+lbu x1, 1(zero)
+lbu x1, 2(zero)
+lbu x1, 3(zero)
+
+/*
+
+00000000 <.text>:
+       0: 93 00 e0 ff  	li	ra, -2
+       4: 23 00 10 00  	sb	ra, 0(zero)
+       8: a3 00 10 00  	sb	ra, 1(zero)
+       c: 23 01 10 00  	sb	ra, 2(zero)
+      10: a3 01 10 00  	sb	ra, 3(zero)
+      14: 23 10 10 00  	sh	ra, 0(zero)
+      18: 23 11 10 00  	sh	ra, 2(zero)
+      1c: 83 20 00 00  	lw	ra, 0(zero)
+      20: 83 10 00 00  	lh	ra, 0(zero)
+      24: 83 10 20 00  	lh	ra, 2(zero)
+      28: 83 50 00 00  	lhu	ra, 0(zero)
+      2c: 83 50 20 00  	lhu	ra, 2(zero)
+      30: 83 00 00 00  	lb	ra, 0(zero)
+      34: 83 00 10 00  	lb	ra, 1(zero)
+      38: 83 00 20 00  	lb	ra, 2(zero)
+      3c: 83 00 30 00  	lb	ra, 3(zero)
+      40: 83 40 00 00  	lbu	ra, 0(zero)
+      44: 83 40 10 00  	lbu	ra, 1(zero)
+      48: 83 40 20 00  	lbu	ra, 2(zero)
+      4c: 83 40 30 00  	lbu	ra, 3(zero)
+*/
