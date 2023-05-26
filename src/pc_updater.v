@@ -1,16 +1,31 @@
 
 // iverilog src/pc_updater.v src/ripple_carry_adder_subtractor.v src/full_adder_LL_nodelay.v 
 
-module pc_updater (clk, cword, imm, r, pc);
+module pc_updater (clk, cword, imm, r, pc, ZCNVFlags);
 
 input wire [31:0] r;
 input wire [31:0] imm;
 input wire clk;
+input wire [3:0] ZCNVFlags;
 output reg [31:0] pc;
 
 input wire [22:0] cword;
 
 `define instType cword[3:0]
+`define fun3 cword[6:4]
+
+`define Z_flag ZCNVFlags[3]
+`define C_flag ZCNVFlags[2]
+`define N_flag ZCNVFlags[1]
+`define V_flag ZCNVFlags[0]
+
+`define BEQ 3'b000
+`define BNE 3'b001
+`define BLT 3'b100
+`define BGE 3'b101
+`define BLTU 3'b110
+`define BGEU 3'b111
+
 
 reg [31:0] A, B;
 wire [31:0] S;
@@ -31,7 +46,14 @@ always @(posedge clk) begin
         A <= pc;
     end
 
-    if (`instType==4'd6 || `instType==4'd8 || `instType==4'd7 || `instType==4'd5 ) begin // if branch, jal, jalr, auipc
+    if (`instType==4'd8 || `instType==4'd7 || `instType==4'd5 || `instType==4'd6 && (
+        (`fun3==`BEQ && `Z_flag==1'b1) || 
+        (`fun3==`BNE && `Z_flag==1'b0) || 
+        (`fun3==`BLT && (`N_flag^`V_flag)==1'b1) || 
+        (`fun3==`BGE && (`N_flag^`V_flag)==1'b0) || 
+        (`fun3==`BLTU && `C_flag==1'b1) || 
+        (`fun3==`BGEU && `C_flag==1'b0)  // TODO: check on real bgeu instructions
+    ) ) begin // if branch, jal, jalr, auipc
         B <= imm;
     end
     else begin
