@@ -1,11 +1,11 @@
 
 // iverilog src/pc_updater.v src/ripple_carry_adder_subtractor.v src/full_adder_LL_nodelay.v 
 
-module pc_updater (clk, cword, imm, r, pc, ZCNVFlags);
+module pc_updater (clk, rst, cword, imm, r, pc, ZCNVFlags);
 
 input wire [31:0] r;
 input wire [31:0] imm;
-input wire clk;
+input wire clk, rst; // TODO: implement reset
 input wire [3:0] ZCNVFlags;
 output reg [31:0] pc;
 
@@ -36,6 +36,7 @@ ripple_carry_adder_subtractor adder ( .Cin(1'b0), .A(A), .B(B), .Cout(Cout), .S(
 initial begin
     A = 0;
     B = 0;
+    pc = 0;
 end
 
 always @(posedge clk) begin

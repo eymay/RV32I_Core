@@ -1,7 +1,7 @@
 
 // iverilog -g2005-sv Datapath.sv hw6/FunctionUnit.v hw5/Datamemory.sv hw5/Regfile.v
 
-module Datapath (clk, rst, cword, pc, imm, r_for_pc);
+module Datapath (clk, rst, cword, pc, imm, r_for_pc, funit_ZCNVFlags);
 
 // control word
 input wire clk, rst;
@@ -23,7 +23,7 @@ output wire [31:0] r_for_pc;
 reg [31:0] funit_A;
 reg [31:0] funit_B;
 reg [3:0] funit_FS;
-wire [3:0] funit_ZCNVFlags;
+output wire [3:0] funit_ZCNVFlags;
 wire [31:0] funit_S;
 
 // parts of datamem
@@ -87,7 +87,7 @@ initial begin
     regfile_wr_din0 = 0;
 end
 
-always @(posedge clk or negedge rst) begin
+always @(*) begin
 
     // funit bindings
     case (`instType)
@@ -110,7 +110,10 @@ always @(posedge clk or negedge rst) begin
         default: funit_B <= -1; // this should never happen
     endcase
 
-    funit_FS <= {`fun3, `fun7};
+    case (`instType)
+        4'd3: funit_FS <= {`fun3, `fun7};
+        default: funit_FS <= {`fun3, 1'b0};
+    endcase
 
     // datamem bindings
 

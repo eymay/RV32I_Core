@@ -18,6 +18,15 @@ module regfile (clk, rst, rd_addr0, rd_addr1, wr_addr0, wr_din0, we0, rd_dout0, 
 
     reg [WIDTH-1:0] mem [0:DEPTH-1];
 
+    // initialize all registers to 0
+    initial begin
+        for (integer i = 0; i<DEPTH; i=i+1) begin
+            mem[i] = {WIDTH{1'b0}};
+        end
+        // note: stack ptr initially 20 for easier debugging
+        // TODO: always check if it conflicts with asm code
+        mem[2] = 20;
+    end
 
     // write functionality. writes synchronously, on rising edge of clk.
     always @(posedge clk) begin

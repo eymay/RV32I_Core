@@ -1,11 +1,11 @@
 
 module pc_updater_tb ();
 
-pc_updater u1 (clk, cword, imm, r, pc, ZCNVFlags);
+pc_updater u1 (clk, rst, cword, imm, r, pc, ZCNVFlags);
 
 reg [31:0] r;
 reg [31:0] imm;
-reg clk;
+reg clk, rst;
 wire [31:0] pc;
 reg [22:0] cword;
 reg [3:0] ZCNVFlags;
@@ -31,6 +31,7 @@ initial begin
     r=9;
     imm=15;
     clk=0;
+    rst=1;
     ZCNVFlags=0;
 end
 
