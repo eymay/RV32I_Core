@@ -99,14 +99,12 @@ always @(*) begin
     endcase
 
     case (`instType)
-        // reg
-        4'd3: funit_B <= regfile_rd_dout1;
+        // reg, branch
+        4'd3, 4'd6: funit_B <= regfile_rd_dout1;
         // store, load, auipc, lui, imm
         4'd2, 4'd0, 4'd5, 4'd4, 4'd1: funit_B <= imm;
         // jal, jalr
         4'd7, 4'd8: funit_B <= 4;
-        // brnch
-        4'd6: funit_B <= -2; // this is not going to be used anyway
         default: funit_B <= -1; // this should never happen
     endcase
 
@@ -115,6 +113,8 @@ always @(*) begin
         4'd3: funit_FS <= {`fun3, `fun7};
         // imm
         4'd1: funit_FS <= {`fun3, 1'b0};
+        // branch
+        4'd6: funit_FS <= {4'b0001};
         default: funit_FS <= 4'b0; // in all other cases do addition
     endcase
 

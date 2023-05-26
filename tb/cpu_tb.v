@@ -14,7 +14,7 @@ initial begin
     clk = 0;
     rst = 1;
 
-    
+
     // for (integer i = 0; i<128; i=i+4) begin
     //     $display("%h %h %h %h", `imem[i+3],`imem[i+2],`imem[i+1],`imem[i]);
     // end
@@ -23,7 +23,7 @@ initial begin
     
     
 
-    #500000;
+    #750;
     $finish;
 
 end
@@ -38,15 +38,15 @@ initial begin
 
     forever begin
 
-        // $display("t=%d", $time);
+        $display("\nt=%d", $time);
 
-        // $display("reg%2d (sp) : %2d", 2, cpu.dp.regfile.mem[2]);
-        // $display("reg%2d (s0) : %2d", 8, cpu.dp.regfile.mem[8]);
-        // $display("reg%2d (s1) : %2d", 9, cpu.dp.regfile.mem[9]);
-        // $display("reg%2d (s2) : %2d", 18, cpu.dp.regfile.mem[18]);
-        // $display("reg%2d (a5) : %2d", 15, cpu.dp.regfile.mem[15]);
-        // $display("reg%2d (a4) : %2d", 14, cpu.dp.regfile.mem[14]);
-        // $display("reg%2d (a0) : %2d", 10, cpu.dp.regfile.mem[10]);
+        $display("reg%2d (sp) : %2d", 2, cpu.dp.regfile.mem[2]);
+        $display("reg%2d (s0) : %2d", 8, cpu.dp.regfile.mem[8]);
+        $display("reg%2d (s1) : %2d", 9, cpu.dp.regfile.mem[9]);
+        $display("reg%2d (s2) : %2d", 18, cpu.dp.regfile.mem[18]);
+        $display("reg%2d (a5) : %2d", 15, cpu.dp.regfile.mem[15]);
+        $display("reg%2d (a4) : %2d", 14, cpu.dp.regfile.mem[14]);
+        $display("reg%2d (a0) : %2d", 10, cpu.dp.regfile.mem[10]);
 
         // for (integer i = 0; i<7; i=i+1) begin
         //     $display("adr%2d..%2d : %d", 4*i, 4*i+3, cpu.dp.datamem.mem[i]);

@@ -32,6 +32,23 @@ module regfile (clk, rst, rd_addr0, rd_addr1, wr_addr0, wr_din0, we0, rd_dout0, 
         mem[10] = 10;
     end
 
+    // TODO: for debug only. remove later
+    wire [31:0] x2;
+    assign x2 = mem[2];
+    wire [31:0] x8;
+    assign x8 = mem[8];
+    wire [31:0] x9;
+    assign x9 = mem[9];
+    wire [31:0] x18;
+    assign x18 = mem[18];
+    wire [31:0] x15;
+    assign x15 = mem[15];
+    wire [31:0] x14;
+    assign x14 = mem[14];
+    wire [31:0] x10;
+    assign x10 = mem[10];
+
+
     // write functionality. writes synchronously, on rising edge of clk.
     always @(posedge clk) begin
        if (we0 && rst && wr_addr0) begin
