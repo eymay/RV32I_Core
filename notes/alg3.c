@@ -119,3 +119,38 @@ square:
  ret
  
 */
+
+
+
+
+/* same thing but with regular register notation
+
+square:
+        addi    x2,x2,-16               
+        sw      x8,12(x2)               
+        sw      x9,8(x2)                
+        sw      x18,4(x2)               
+        addi    x8,x2,16                
+        addi      x15,x10,0             
+        bge     x15,zero,.L2                
+        sub     x15,0, x15             
+.L2:
+        addi      x18,x15 ,0                
+        addi      x9,zero, 1
+        jal      zero,    .L3
+.L4:
+        addi      x14,x15,0
+        add     x18,x18,x14
+        addi    x9,x9,1
+.L3:
+        addi      x14,x15,0
+        bltu    x9,x14,.L4
+        addi      x15,x18,0
+        addi      x10,x15,0
+        lw      x8,12(x2)
+        lw      x9,8(x2)
+        lw      x18,4(x2)
+        addi    x2,x2,16
+        jr      x1
+
+*/
