@@ -26,6 +26,10 @@ module regfile (clk, rst, rd_addr0, rd_addr1, wr_addr0, wr_din0, we0, rd_dout0, 
         // note: stack ptr initially 20 for easier debugging
         // TODO: always check if it conflicts with asm code
         mem[2] = 20;
+        mem[8] = 12345678;
+        mem[9] = 11223344;
+        mem[18] = 10203040;
+        mem[10] = 10;
     end
 
     // write functionality. writes synchronously, on rising edge of clk.

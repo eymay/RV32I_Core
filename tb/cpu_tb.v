@@ -23,7 +23,7 @@ initial begin
     
     
 
-    #50;
+    #500000;
     $finish;
 
 end
@@ -38,12 +38,21 @@ initial begin
 
     forever begin
 
-        #10;
-        $display("t=%d", $time);
+        // $display("t=%d", $time);
 
-        for (integer i = 0; i<5; i=i+1) begin
-            $display("reg%2d : %d", i, cpu.dp.regfile.mem[i]);
-        end
+        // $display("reg%2d (sp) : %2d", 2, cpu.dp.regfile.mem[2]);
+        // $display("reg%2d (s0) : %2d", 8, cpu.dp.regfile.mem[8]);
+        // $display("reg%2d (s1) : %2d", 9, cpu.dp.regfile.mem[9]);
+        // $display("reg%2d (s2) : %2d", 18, cpu.dp.regfile.mem[18]);
+        // $display("reg%2d (a5) : %2d", 15, cpu.dp.regfile.mem[15]);
+        // $display("reg%2d (a4) : %2d", 14, cpu.dp.regfile.mem[14]);
+        // $display("reg%2d (a0) : %2d", 10, cpu.dp.regfile.mem[10]);
+
+        // for (integer i = 0; i<7; i=i+1) begin
+        //     $display("adr%2d..%2d : %d", 4*i, 4*i+3, cpu.dp.datamem.mem[i]);
+        // end
+
+        #10;
     end
 end
 

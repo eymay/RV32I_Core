@@ -10,3 +10,4 @@ test/cocotb/*.fst
 
 *.vvp
 *.out
+dump.vcd

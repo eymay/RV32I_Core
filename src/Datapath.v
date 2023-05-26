@@ -111,8 +111,11 @@ always @(*) begin
     endcase
 
     case (`instType)
+        // reg
         4'd3: funit_FS <= {`fun3, `fun7};
-        default: funit_FS <= {`fun3, 1'b0};
+        // imm
+        4'd1: funit_FS <= {`fun3, 1'b0};
+        default: funit_FS <= 4'b0; // in all other cases do addition
     endcase
 
     // datamem bindings
