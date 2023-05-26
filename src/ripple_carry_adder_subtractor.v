@@ -21,5 +21,5 @@ module ripple_carry_adder_subtractor #(
     end
     endgenerate
 
-    assign Cout = carry_connector[N];
+    assign Cout = carry_connector[0] ^ carry_connector[N];
 endmodule
