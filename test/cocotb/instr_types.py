@@ -71,7 +71,7 @@ class Alu_type:
         return self.op(self.ideal_operand1,self.ideal_operand2)
 
     def check_ALU(self):
-        assert self.dut.dp.o_ALU.value == self.ideal_result, "ALU output not correct {} != {}".format(self.dut.dp.o_ALU.value, self.ideal_result)
+        assert self.dut.dp.funit_S.value == self.ideal_result, "ALU output not correct {} != {}".format(self.dut.dp.o_ALU.value, self.ideal_result)
 
     def check_rd(self):
         assert self.rd.value == self.ideal_result, "Destination register has wrong result {} != {}".format(self.rd.value, self.ideal_result)
@@ -104,7 +104,7 @@ class Alu_ri(Alu_type):
                 str(imm))
 
     def check_imm(self):
-        assert self.dut.dp.o_imm.value == self.imm, "Immediate produced is not correct {} != {}".format(self.dut.dp.o_imm.value, self.imm)
+        assert self.dut.dp.imm.value == self.imm, "Immediate produced is not correct {} != {}".format(self.dut.dp.imm.value, self.imm)
 
     def debug_imm(self):
         print("Imm:", self.dut.dp.o_imm.value)
