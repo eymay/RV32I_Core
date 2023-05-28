@@ -17,5 +17,3 @@ def debug_signals(instr_obj, addr):
 
     debug_instr(instr_obj, addr)
 
-
-

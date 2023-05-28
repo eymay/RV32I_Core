@@ -123,6 +123,7 @@ class Instruction():
 
 class Alu_type:
     """Class that does computation, R and I type instrs"""
+<<<<<<< HEAD
     def __init__(self, arch, rd, rs1,  op, opstring):
         reg = arch.get_regs("regfile")
         self.rd_idx = rd
@@ -198,3 +199,4 @@ class Alu_ri(Alu_type):
     def debug_imm(self):
         out_imm = self.arch.get_output("immed_gen")
         print("Imm:", out_imm.value)
+

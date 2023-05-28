@@ -8,7 +8,7 @@ VERILOG_SOURCES += ../../src/*.v
 # use VHDL_SOURCES for VHDL files
 
 # TOPLEVEL is the name of the toplevel module in your Verilog or VHDL file
-TOPLEVEL = ALU_system
+TOPLEVEL = cpu
 
 # MODULE is the basename of the Python test file
 MODULE = add_cocotb

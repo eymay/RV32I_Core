@@ -1,8 +1,0 @@
-<testsuites name="results">
-  <testsuite name="all" package="all">
-    <property name="random_seed" value="1684435670" />
-    <testcase name="test_dff_simple" classname="add_cocotb" file="/home/eymen/Documents/VLSI-II/RV32I_Core/test/cocotb/add_cocotb.py" lineno="7" time="0.004851818084716797" sim_time_ns="1000000000" ratio_time="206108304668.30466">
-      <failure />
-    </testcase>
-  </testsuite>
-</testsuites>

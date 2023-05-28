@@ -1,30 +1,17 @@
-module control_unit (
-    input clk,
-    input [2:0] type_select,
-    output reg [5:0] ctrl_wrd
-);
-    parameter 
-    Load = 3'b000,
-    Store = 3'b010,
-    R_imm = 3'b001,
-    R = 3'b011,
-    B = 3'b110;
-    //{s_inc_imm_i_PC, s_reg_imm_ALU_B, s_ALU_dmem_wregdata, sig_w_ctrl_reg,  sig_r_ctrl_data_mem,  sig_w_ctrl_data_mem} = ctrl_wrd
 
-    always @(*) begin
-        case (type_select)
-            Load: //Load
-                ctrl_wrd <= 6'b011110;
-            Store:
-                ctrl_wrd <= 6'b010001;
-            R_imm:
-                ctrl_wrd <= 6'b010100; //TODO check validity of s_reg_imm_ALU_B for all types
-            R: 
-                ctrl_wrd <= 6'b000100;
-            B:
-                ctrl_wrd <= 6'b100000;
-             
-        endcase
-    end
-    
+
+module control_unit (clk, rst, r_for_pc, cword, inst, imm, pc, ZCNVFlags);
+
+input wire clk, rst;
+
+input wire [31:0] r_for_pc;
+output wire [22:0] cword;
+input wire [31:0] inst;
+output wire [31:0] imm;
+output wire [31:0] pc;
+input wire [3:0] ZCNVFlags;
+
+immed_gen immed_gen (.cword(cword), .inst(inst), .imm(imm));
+instr_dec instr_dec  ( .inst(inst), .cword(cword));
+pc_updater pc_updater  (.clk(clk), .rst(rst), .cword(cword), .imm(imm), .r(r_for_pc), .pc(pc), .ZCNVFlags(ZCNVFlags));
 endmodule

@@ -14,6 +14,7 @@ def set_instruction(instr_obj, addr):
     for i in range(4):
         instr_mem[addr+i].value = int(instr[i], 16)
 
+
 async def initialize(dut):
     clock = Clock(dut.clk, 10, units="ns")
     cocotb.start_soon(clock.start())
@@ -54,7 +55,6 @@ async def generic_itype_test(dut, op, opstring, debug = True):
     pc.value = 4
 
 async def generic_rtype_test(dut, op, opstring):
-    
     await initialize(dut)
 
     rd = 1
@@ -81,3 +81,4 @@ async def generic_rtype_test(dut, op, opstring):
 
     pc = instr_obj.arch.get_regs("pc")
     pc.value = 4
+
