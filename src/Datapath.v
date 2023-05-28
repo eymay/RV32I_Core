@@ -24,7 +24,7 @@ wire [31:0] o_regfile_rreg1;
 wire [31:0] i_ALU_B;
 wire [31:0] i_regfile_wdata;
 
-FunctionUnit ALU(.FS(FS), .A(o_regfile_rreg1), .B(i_ALU_B), .S(o_ALU), .ZCNVFlags(ZCNV));
+FunctionUnit FU(.FS(FS), .A(o_regfile_rreg1), .B(i_ALU_B), .S(o_ALU), .ZCNVFlags(ZCNV));
 
 n_bit_mux #(.N(32)) ALU_B_select (
     .s(s_reg_imm_ALU_B), .i_n_mux_x(o_regfile_rreg2), .i_n_mux_y(o_imm), .o_n_mux(i_ALU_B));
