@@ -123,7 +123,6 @@ class Instruction():
 
 class Alu_type:
     """Class that does computation, R and I type instrs"""
-<<<<<<< HEAD
     def __init__(self, arch, rd, rs1,  op, opstring):
         reg = arch.get_regs("regfile")
         self.rd_idx = rd
