@@ -39,17 +39,25 @@ module data_mem (clk, rst, rd_addr0, wr_addr0, wr_din0, we0, rd_dout0, wr_strb);
     // write functionality. writes synchronously, on rising edge of clk.
     // all the write operations are programmed to be strictly little endian
     always @(posedge clk or negedge rst) begin
-       if (we0 && rst) begin
-            case (wr_strb)
-                 0: mem[wr_addr0][31:0] <= wr_din0[31:0];
-                 1: mem[wr_addr0][15:0] <= wr_din0[15:0];
-               /*2: NOP*/
-                 3: mem[wr_addr0][31:16] <= wr_din0[15:0];
-                 4: mem[wr_addr0][7:0] <= wr_din0[7:0];
-                 5: mem[wr_addr0][15:8] <= wr_din0[7:0];
-                 6: mem[wr_addr0][23:16] <= wr_din0[7:0];
-                 7: mem[wr_addr0][31:24] <= wr_din0[7:0];
-            endcase
+       if (!rst) begin
+            // reset is async, works immediately. rst=0 means reset.
+            for (integer i = 0; i<DEPTH; i=i+1) begin
+                mem[i] <= {32{1'b0}};
+            end
+        end
+        else begin
+           if (we0 && rst) begin
+                case (wr_strb)
+                     0: mem[wr_addr0][31:0] <= wr_din0[31:0];
+                     1: mem[wr_addr0][15:0] <= wr_din0[15:0];
+                   /*2: NOP*/
+                     3: mem[wr_addr0][31:16] <= wr_din0[15:0];
+                     4: mem[wr_addr0][7:0] <= wr_din0[7:0];
+                     5: mem[wr_addr0][15:8] <= wr_din0[7:0];
+                     6: mem[wr_addr0][23:16] <= wr_din0[7:0];
+                     7: mem[wr_addr0][31:24] <= wr_din0[7:0];
+                endcase
+            end
         end
 
         `ifdef DEBUG_MEM
@@ -57,14 +65,6 @@ module data_mem (clk, rst, rd_addr0, wr_addr0, wr_din0, we0, rd_dout0, wr_strb);
         `endif
     end
 
-    // reset is async, works immediately. rst=0 means reset.
-    always @(*) begin
-        if (!rst) begin
-            for (integer i = 0; i<DEPTH; i=i+1) begin
-                mem[i] <= {32{1'b0}};
-            end
-        end
-    end
 
     // read functionality. reads asynchronously.
     // currently rd_dout0 is a reg, but this could be changed to wire & some 'and' logic.
