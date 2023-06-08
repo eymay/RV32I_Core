@@ -8,20 +8,39 @@ reg rst;
 
 cpu cpu(clk,rst);
 
-`define imem cpu.instr_mem.imem
 initial begin
     $dumpvars;
     clk = 0;
     rst = 1;
 
-    // exponentiation algorithm
-    $readmemh("exponentiation.mem", `imem);
+    #1; // initialize memories with data after t=0 because at t=0 they're filled with zeros.
 
-    // store load half byte test instructions
-    //$readmemh("half_byte_test.mem", `imem);
+    // initialize instruction memory:
+    $readmemh("tb/bubble_sort/bubble_sort.instr", cpu.instr_mem.mem);
+    // $readmemh("exponentiation.mem", cpu.instr_mem.mem);
 
-    #750;
-    $finish;
+    // initialize registers:
+    // cpu.dp.regfile.mem[10] = 5;
+
+    // initialize data memory:
+    $readmemh("tb/bubble_sort/bubble_sort.data", cpu.datamem.mem);
+
+    #10;
+
+    $display("datamem:");
+    for (integer i = 0; i<=511/4; i=i+1) begin
+        $display("adr%2d..%2d : %d", 4*i, 4*i+3, cpu.datamem.mem[i]);
+    end
+
+    $display("instr_mem:");
+    for (integer i = 0; i<=511/4; i=i+1) begin
+        $display("adr%2d..%2d : %h", 4*i, 4*i+3, cpu.instr_mem.mem[i]);
+    end
+
+    // $finish;
+
+    // #1000;
+    // $finish;
 
 end
 
@@ -35,33 +54,38 @@ initial begin
 
     forever begin
 
-        $display("\nt=%d", $time);
+        $display("\nt=%5d", $time);
 
         // These are for exponentiation algo testing
         // Here input is x10 (a0) and output is the same register
         // By t=600 the output is already calculated
-        $display("reg%2d (sp) : %2d", 2, cpu.dp.regfile.mem[2]);
-        $display("reg%2d (s0) : %2d", 8, cpu.dp.regfile.mem[8]);
-        $display("reg%2d (s1) : %2d", 9, cpu.dp.regfile.mem[9]);
-        $display("reg%2d (s2) : %2d", 18, cpu.dp.regfile.mem[18]);
-        $display("reg%2d (a5) : %2d", 15, cpu.dp.regfile.mem[15]);
-        $display("reg%2d (a4) : %2d", 14, cpu.dp.regfile.mem[14]);
+        // $display("reg%2d (sp) : %2d", 2, cpu.dp.regfile.mem[2]);
+        // $display("reg%2d (s0) : %2d", 8, cpu.dp.regfile.mem[8]);
+        // $display("reg%2d (s1) : %2d", 9, cpu.dp.regfile.mem[9]);
+        // $display("reg%2d (s2) : %2d", 18, cpu.dp.regfile.mem[18]);
+        // $display("reg%2d (a5) : %2d", 15, cpu.dp.regfile.mem[15]);
+        // $display("reg%2d (a4) : %2d", 14, cpu.dp.regfile.mem[14]);
         $display("reg%2d (a0) : %2d", 10, cpu.dp.regfile.mem[10]);
 
         // You can uncomment this to see the memory
         // This is not necessary because memory here
         // is used only to save certain registers (callee saves)
 
-        // for (integer i = 0; i<7; i=i+1) begin
-        //     $display("adr%2d..%2d : %d", 4*i, 4*i+3, cpu.datamem.mem[i]);
-        // end
+        $display("FROM:");
+        for (integer i = 67; i<=70; i=i+1) begin
+            $display("adr%2d..%2d : %d", 4*i, 4*i+3, cpu.datamem.mem[i]);
+        end
 
+        $display("TO:");
+        for (integer i = 117; i<=120; i=i+1) begin
+            $display("adr%2d..%2d : %d", 4*i, 4*i+3, cpu.datamem.mem[i]);
+        end
 
-        // Uncomment this is for the store/load word/half/byte test
-        // $display("reg%2d (ra): %32b", 1, cpu.dp.regfile.mem[1]);
-        // $display("adr%2d..%2d : %32b", 0, 3, cpu.datamem.mem[0]);
+        $display("pc : %d", cpu.cu.pc_updater.pc);
 
-
+        if ( cpu.cu.pc_updater.pc == 32'h108 ) begin
+            $finish;
+        end
 
         #10;
     end

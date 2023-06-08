@@ -44,8 +44,8 @@ Datapath dp (
     .datamem_rd_dout0(datamem_rd_dout0),
     .datamem_wr_strb(datamem_wr_strb));
 instr_mem instr_mem (
-    .r_addr_imem(pc[6:0]), // note: this must be changed according to the inst mem size
-    .r_data_imem(inst));
+    .rd_addr0(pc[8:2]), // note: this must be changed according to the inst mem size
+    .rd_dout0(inst));
 data_mem datamem (
     .clk(clk),
     .rst(rst),
