@@ -20,7 +20,7 @@ module shifter (
 		.B(reg_B),
 		.H(reg_H)
 	);
-	always @(*) begin : instruction_select
+	always @(*) begin 
 		case (S)
 			SLL: begin
 				reg_IR = 1'b0;
