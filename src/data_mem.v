@@ -38,7 +38,7 @@ module data_mem (clk, rst, rd_addr0, wr_addr0, wr_din0, we0, rd_dout0, wr_strb);
 
     // write functionality. writes synchronously, on rising edge of clk.
     // all the write operations are programmed to be strictly little endian
-    always @(posedge clk, rst) begin
+    always @(posedge clk or negedge rst) begin
        if (we0 && rst) begin
             case (wr_strb)
                  0: mem[wr_addr0][31:0] <= wr_din0[31:0];
