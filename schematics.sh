@@ -7,3 +7,5 @@ netlistsvg $1.json -o $1.svg
 
 Yosys "cpu"
 Yosys "Datapath"
+Yosys "control_unit"
+Yosys "pc_updater"

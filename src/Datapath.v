@@ -7,6 +7,7 @@ module Datapath (clk, rst, cword, pc, imm, r_for_pc, funit_ZCNVFlags,
 
 // control word
 input wire clk, rst;
+//TODO cword for every stage 
 input wire [22:0] cword;
 
 `define instType cword[3:0]
@@ -40,8 +41,10 @@ output reg [2:0] datamem_wr_strb;
 // parts of regfile
 reg regfile_we0;
 reg [4:0] regfile_rd_addr0;
+//TODO ID/EX
 wire [31:0] regfile_rd_dout0; // rs1
 reg [4:0] regfile_rd_addr1;
+//TODO ID/EX
 wire [31:0] regfile_rd_dout1;  // rs2
 reg [4:0] regfile_wr_addr0;
 reg [31:0] regfile_wr_din0;
