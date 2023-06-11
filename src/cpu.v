@@ -5,9 +5,9 @@ input wire clk;
 input wire rst;
 
 wire [31:0] r_for_pc;
-wire [22:0] cword;
+wire [22:0] cwordID, cwordEX, cwordMEM, cwordWB;
 wire [31:0] inst;
-wire [31:0] imm;
+wire [31:0] immEX, immMEM;
 wire [31:0] pc;
 wire [3:0] ZCNVFlags;
 
@@ -22,18 +22,26 @@ wire [2:0] datamem_wr_strb;
 control_unit cu (
     .clk(clk),
     .rst(rst),
-    .cword(cword),
+    .cwordID(cwordID),
+    .cwordEX(cwordEX),
+    .cwordMEM(cwordMEM),
+    .cwordWB(cwordWB),
     .pc(pc),
-    .imm(imm),
+    .immEX(immEX),
+    .immMEM(immMEM),
     .inst(inst),
     .r_for_pc(r_for_pc),
     .ZCNVFlags(ZCNVFlags));
 Datapath dp (
     .clk(clk),
     .rst(rst),
-    .cword(cword),
+    .cwordID(cwordID),
+    .cwordEX(cwordEX),
+    .cwordMEM(cwordMEM),
+    .cwordWB(cwordWB),
     .pc(pc),
-    .imm(imm),
+    .immEX(immEX),
+    .immMEM(immMEM),
     .r_for_pc(r_for_pc),
     .funit_ZCNVFlags(ZCNVFlags),
     // parts connecting datapath and data_mem

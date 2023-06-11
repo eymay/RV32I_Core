@@ -16,26 +16,27 @@ initial begin
     #1; // initialize memories with data after t=0 because at t=0 they're filled with zeros.
 
     // initialize instruction memory:
-    $readmemh("tb/bubble_sort/bubble_sort.instr", cpu.instr_mem.mem);
+    // $readmemh("tb/bubble_sort/bubble_sort.instr", cpu.instr_mem.mem);
     // $readmemh("exponentiation.mem", cpu.instr_mem.mem);
+    $readmemh("exponentiation_with_nops.mem", cpu.instr_mem.mem);
 
     // initialize registers:
-    // cpu.dp.regfile.mem[10] = 5;
+    cpu.dp.regfile.mem[10] = 5;
 
     // initialize data memory:
-    $readmemh("tb/bubble_sort/bubble_sort.data", cpu.datamem.mem);
+    // $readmemh("tb/bubble_sort/bubble_sort.data", cpu.datamem.mem);
 
     #10;
 
-    $display("datamem:");
-    for (integer i = 0; i<=511/4; i=i+1) begin
-        $display("adr%2d..%2d : %d", 4*i, 4*i+3, cpu.datamem.mem[i]);
-    end
+    // $display("datamem:");
+    // for (integer i = 0; i<=511/4; i=i+1) begin
+    //     $display("adr%2d..%2d : %d", 4*i, 4*i+3, cpu.datamem.mem[i]);
+    // end
 
-    $display("instr_mem:");
-    for (integer i = 0; i<=511/4; i=i+1) begin
-        $display("adr%2d..%2d : %h", 4*i, 4*i+3, cpu.instr_mem.mem[i]);
-    end
+    // $display("instr_mem:");
+    // for (integer i = 0; i<=511/4; i=i+1) begin
+    //     $display("adr%2d..%2d : %h", 4*i, 4*i+3, cpu.instr_mem.mem[i]);
+    // end
 
     // $finish;
 
@@ -71,21 +72,22 @@ initial begin
         // This is not necessary because memory here
         // is used only to save certain registers (callee saves)
 
-        $display("FROM:");
-        for (integer i = 67; i<=70; i=i+1) begin
-            $display("adr%2d..%2d : %d", 4*i, 4*i+3, cpu.datamem.mem[i]);
-        end
+        // $display("FROM:");
+        // for (integer i = 67; i<=70; i=i+1) begin
+        //     $display("adr%2d..%2d : %d", 4*i, 4*i+3, cpu.datamem.mem[i]);
+        // end
 
-        $display("TO:");
-        for (integer i = 117; i<=120; i=i+1) begin
-            $display("adr%2d..%2d : %d", 4*i, 4*i+3, cpu.datamem.mem[i]);
-        end
+        // $display("TO:");
+        // for (integer i = 117; i<=120; i=i+1) begin
+        //     $display("adr%2d..%2d : %d", 4*i, 4*i+3, cpu.datamem.mem[i]);
+        // end
 
         $display("pc : %d", cpu.cu.pc_updater.pc);
 
-        if ( cpu.cu.pc_updater.pc == 32'h108 ) begin
-            $finish;
-        end
+        // note: this is for bubble_sort only
+        // if ( cpu.cu.pc_updater.pc == 32'h108 ) begin
+        //     $finish;
+        // end
 
         #10;
     end
