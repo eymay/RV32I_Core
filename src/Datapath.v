@@ -47,7 +47,7 @@ reg [31:0] funit_A;
 reg [31:0] funit_B;
 reg [3:0] funit_FS;
 output wire [3:0] funit_ZCNVFlags;
-wire [31:0] funit_S;
+wire [31:0] funit_S, funit_S_MEM;
 
 // parts of datamem
 output reg datamem_we0;
@@ -61,11 +61,12 @@ output reg [2:0] datamem_wr_strb;
 // parts of regfile
 reg regfile_we0;
 reg [4:0] regfile_rd_addr0;
-wire [31:0] regfile_rd_dout0; // rs1
+wire [31:0] regfile_rd_dout0, regfile_rd_dout0_EX; // rs1
 reg [4:0] regfile_rd_addr1;
-wire [31:0] regfile_rd_dout1;  // rs2
+wire [31:0] regfile_rd_dout1, regfile_rd_dout1_EX, regfile_rd_dout1_MEM;  // rs2
 reg [4:0] regfile_wr_addr0;
 reg [31:0] regfile_wr_din0;
+wire [31:0] regfile_wr_din0_MEM, regfile_wr_din0_WB;
 
 
 FunctionUnit funit (
@@ -77,12 +78,20 @@ regfile regfile (
     .rd_addr0(regfile_rd_addr0),
     .rd_addr1(regfile_rd_addr1), 
     .wr_addr0(regfile_wr_addr0), 
-    .wr_din0(regfile_wr_din0), 
+    .wr_din0(regfile_wr_din0_WB), 
     .we0(regfile_we0), 
     .rd_dout0(regfile_rd_dout0),
     .rd_dout1(regfile_rd_dout1));
 
-assign r_for_pc = regfile_rd_dout0;
+pipeline_reg #(.WIDTH(32)) regfile_rd_dout0_IDEX (.clk(clk), .rst(rst), .D(regfile_rd_dout0), .Q(regfile_rd_dout0_EX));
+pipeline_reg #(.WIDTH(32)) regfile_rd_dout1_IDEX (.clk(clk), .rst(rst), .D(regfile_rd_dout1), .Q(regfile_rd_dout1_EX));
+pipeline_reg #(.WIDTH(32)) regfile_rd_dout1_EXMEM (.clk(clk), .rst(rst), .D(regfile_rd_dout1_EX), .Q(regfile_rd_dout1_MEM));
+pipeline_reg #(.WIDTH(32)) funit_S_EXMEM (.clk(clk), .rst(rst), .D(funit_S), .Q(funit_S_MEM));
+pipeline_reg #(.WIDTH(32)) regfile_wr_din0_MEMWB (.clk(clk), .rst(rst), .D(regfile_wr_din0_MEM), .Q(regfile_wr_din0_WB));
+
+assign regfile_wr_din0_MEM = regfile_wr_din0;
+
+assign r_for_pc = regfile_rd_dout0_EX;
 
 initial begin
     funit_A = 0;
@@ -107,13 +116,13 @@ always @(*) begin
         // jal, jalr, auipc
         4'd8, 4'd7, 4'd5: funit_A <= pc;
         // load, imm, store, reg, lui, brnch
-        4'd0, 4'd1, 4'd2, 4'd3, 4'd4, 4'd6: funit_A <= regfile_rd_dout0;
+        4'd0, 4'd1, 4'd2, 4'd3, 4'd4, 4'd6: funit_A <= regfile_rd_dout0_EX;
         default: funit_A <= -1; // this should never happen
     endcase
 
     case (`instTypeEX)
         // reg, branch
-        4'd3, 4'd6: funit_B <= regfile_rd_dout1;
+        4'd3, 4'd6: funit_B <= regfile_rd_dout1_EX;
         // store, load, auipc, lui, imm
         4'd2, 4'd0, 4'd5, 4'd4, 4'd1: funit_B <= immEX;
         // jal, jalr
@@ -137,9 +146,9 @@ always @(*) begin
     if (`instTypeMEM == 4'd2) datamem_we0 <= 1;
     else datamem_we0 <= 0;
 
-    datamem_rd_addr0 <= funit_S[31:2];
-    datamem_wr_addr0 <= funit_S[31:2];
-    datamem_wr_din0 <= regfile_rd_dout1;
+    datamem_rd_addr0 <= funit_S_MEM[31:2];
+    datamem_wr_addr0 <= funit_S_MEM[31:2];
+    datamem_wr_din0 <= regfile_rd_dout1_MEM;
 
     case (`fun3MEM)
         // store word
@@ -194,7 +203,7 @@ always @(*) begin
     
     case (`instTypeMEM) // TODO test this
         // reg, imm, auipc, jal, jalr
-        4'd3, 4'd1, 4'd5, 4'd7, 4'd8: regfile_wr_din0 <= funit_S;
+        4'd3, 4'd1, 4'd5, 4'd7, 4'd8: regfile_wr_din0 <= funit_S_MEM;
         // load
         4'd0: regfile_wr_din0 <= datamem_out;
         // lui

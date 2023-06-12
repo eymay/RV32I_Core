@@ -8,7 +8,7 @@ wire [31:0] r_for_pc;
 wire [22:0] cwordID, cwordEX, cwordMEM, cwordWB;
 wire [31:0] inst;
 wire [31:0] immEX, immMEM;
-wire [31:0] pc;
+wire [31:0] pc, pcEX;
 wire [3:0] ZCNVFlags;
 
 // parts of datamem
@@ -27,6 +27,7 @@ control_unit cu (
     .cwordMEM(cwordMEM),
     .cwordWB(cwordWB),
     .pc(pc),
+    .pcEX(pcEX),
     .immEX(immEX),
     .immMEM(immMEM),
     .inst(inst),
@@ -39,7 +40,7 @@ Datapath dp (
     .cwordEX(cwordEX),
     .cwordMEM(cwordMEM),
     .cwordWB(cwordWB),
-    .pc(pc),
+    .pc(pcEX),
     .immEX(immEX),
     .immMEM(immMEM),
     .r_for_pc(r_for_pc),

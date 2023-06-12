@@ -18,11 +18,11 @@ initial begin
     // initialize instruction memory:
     // $readmemh("tb/bubble_sort/bubble_sort.instr", cpu.instr_mem.mem);
     // $readmemh("exponentiation.mem", cpu.instr_mem.mem);
-    $readmemh("exponentiation_with_nops.mem", cpu.instr_mem.mem);
+    $readmemh("exponentiation_pc_fixed.mem", cpu.instr_mem.mem);
 
     // initialize registers:
-    cpu.dp.regfile.mem[10] = 5;
-    cpu.dp.regfile.mem[2] = 20;
+    cpu.dp.regfile.mem[10] = 7;
+    // cpu.dp.regfile.mem[2] = 20;
 
     // initialize data memory:
     // $readmemh("tb/bubble_sort/bubble_sort.data", cpu.datamem.mem);
@@ -41,8 +41,8 @@ initial begin
 
     // $finish;
 
-    #100;
-    $finish;
+    // #100;
+    // $finish;
 
 end
 
@@ -83,12 +83,16 @@ initial begin
         //     $display("adr%2d..%2d : %d", 4*i, 4*i+3, cpu.datamem.mem[i]);
         // end
 
-        $display("pc : %d", cpu.cu.pc_updater.pc);
+        $display("pc : %d", cpu.cu.pc_updater.pc_output);
 
         // note: this is for bubble_sort only
         // if ( cpu.cu.pc_updater.pc == 32'h108 ) begin
         //     $finish;
         // end
+
+        if (cpu.dp.regfile.mem[10] == 49) begin
+            $finish;
+        end
 
         #10;
     end
