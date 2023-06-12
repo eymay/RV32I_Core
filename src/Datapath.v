@@ -199,9 +199,9 @@ always @(*) begin
 
     regfile_rd_addr0 <= `rs1ID;
     regfile_rd_addr1 <= `rs2ID;
-    regfile_wr_addr0 <= `rdWB; // TODO test this
+    regfile_wr_addr0 <= `rdWB;
     
-    case (`instTypeMEM) // TODO test this
+    case (`instTypeMEM)
         // reg, imm, auipc, jal, jalr
         4'd3, 4'd1, 4'd5, 4'd7, 4'd8: regfile_wr_din0 <= funit_S_MEM;
         // load
