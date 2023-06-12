@@ -57,7 +57,7 @@ square:
 
 /*
 
-ff010113 // TODO: dis, llvm ters cikti veriyor le->be 
+ff010113
 00812623
 00912423
 01212223
@@ -65,12 +65,15 @@ ff010113 // TODO: dis, llvm ters cikti veriyor le->be
 00050793
 0007d463
 40f007b3
+         
 00078913
 00100493
 0100006f
+         
 00078713
 00e90933
 00148493
+         
 00078713
 fee4e8e3
 00090793
@@ -126,31 +129,43 @@ square:
 /* same thing but with regular register notation
 
 square:
-        addi    x2,x2,-16               
-        sw      x8,12(x2)               
-        sw      x9,8(x2)                
-        sw      x18,4(x2)               
-        addi    x8,x2,16                
-        addi      x15,x10,0             
-        bge     x15,zero,.L2                
-        sub     x15,0, x15             
-.L2:
-        addi      x18,x15 ,0                
-        addi      x9,zero, 1
-        jal      zero,    .L3
-.L4:
-        addi      x14,x15,0
-        add     x18,x18,x14
-        addi    x9,x9,1
-.L3:
-        addi      x14,x15,0
-        bltu    x9,x14,.L4
-        addi      x15,x18,0
-        addi      x10,x15,0
-        lw      x8,12(x2)
-        lw      x9,8(x2)
-        lw      x18,4(x2)
-        addi    x2,x2,16
-        jr      x1
+        addi    x2, x2, -16            ff010113                
+        sw      x8, 12(x2)             00812623                
+        sw      x9, 8(x2)              00912423                
+        sw      x18, 4(x2)             01212223                
+        addi    x8, x2, 16             01010413                
+        addi    x15, x10, 0            00050793               
+        bge     x15, x0, .L2           0007d463                   
+        sub     x15, 0,  x15           40f007b3                
+.L2:                                                                 
+        addi    x18, x15 , 0           00078913                   
+        addi    x9, x0,  1             00100493               
+        jal     x0, .L3                0100006f            
+.L4:                                                                               
+        addi    x14, x15, 0            00078713                              
+        add     x18, x18, x14          00e90933                  
+        addi    x9, x9, 1              00148493              
+.L3:                                                                               
+        addi    x14, x15, 0            00078713                
+        bltu    x9, x14, .L4           fee4e8e3                 
+        addi    x15, x18, 0            00090793                
+        addi    x10, x15, 0            00078513                
+        lw      x8, 12(x2)             00c12403               
+        lw      x9, 8(x2)              00812483              
+        lw      x18, 4(x2)             00412903               
+        addi    x2, x2, 16             01010113               
+        jr      x1                     00008067                     
 
 */
+
+
+
+square:            
+bge  x15, x0, 8   ->    bge  x15, x0, 40           0007d463 -> 0207d463
+jal  x0, 16       ->    jal  x0, 80                0100006f -> 0500006f
+bltu x9, x14, -16 ->    bltu x9, x14, -80          fee4e8e3 -> fae4e8e3
+
+bge     x15, x0, .L2
+
+
+bge     x15, x0, 8
