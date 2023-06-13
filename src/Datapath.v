@@ -188,7 +188,11 @@ always @(*) begin
     datamem_rd_addr0 <= funit_S_MEM[31:2];
     datamem_wr_addr0 <= funit_S_MEM[31:2];
     datamem_wr_din0 <= regfile_rd_dout1_MEM;
+    //TODO %Warning-WIDTH: src/Datapath.v:188:22: Operator ASSIGNDLY expects 7 bits on the Assign RHS, but Assign RHS's SEL generates 30 bits.
+    datamem_rd_addr0 = funit_S_MEM[31:2];
+    //TODO src/Datapath.v:189:22: Operator ASSIGNDLY expects 7 bits on the Assign RHS, but Assign RHS's SEL generates 30 bits.
 
+//TODO %Warning-CASEINCOMPLETE: src/Datapath.v:192:5: Case values incompletely covered (example pattern 0x3)
     case (`fun3MEM)
         // store word
         3'b010: datamem_wr_strb <= 3'b000;
@@ -198,6 +202,7 @@ always @(*) begin
         3'b000: datamem_wr_strb <= {1'b1, immMEM[1:0]};
     endcase
 
+//TODO %Warning-CASEINCOMPLETE: src/Datapath.v:201:5: Case values incompletely covered (example pattern 0x3)
     case (`fun3MEM)
         // LW
         3'b010: datamem_out <= datamem_rd_dout0;

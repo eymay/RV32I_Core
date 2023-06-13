@@ -24,6 +24,7 @@ module FunctionUnit (
     shifter s(.S({FS[3], FS[0]}), .shift(B[4:0]), .B(A), .H(Shift_result));
 
     always @(*) begin
+//TODO %Warning-CASEINCOMPLETE: src/FunctionUnit.v:27:9: Case values incompletely covered (example pattern 0x3)
         case (FS)
             ADD, SUB, XOR, OR, AND:
                 S = ALU_result;

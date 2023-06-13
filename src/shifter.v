@@ -21,6 +21,7 @@ module shifter (
 		.H(reg_H)
 	);
 	always @(*) begin 
+//TODO %Warning-CASEINCOMPLETE: src/shifter.v:24:3: Case values incompletely covered (example pattern 0x1)
 		case (S)
 			SLL: begin
 				reg_IR = 1'b0;
