@@ -54,6 +54,8 @@ module shifter (
 				reg_B = B;
 				H = reg_H;
 			end
+            default:
+                H = 0; //Error handling can be added
 		endcase
 	end
 endmodule

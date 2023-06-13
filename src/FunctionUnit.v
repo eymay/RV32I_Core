@@ -34,7 +34,8 @@ module FunctionUnit (
                 S = (A_signed < B_signed) ? 1:0;
             SLTU:
                 S = (A < B) ? 1:0;
-
+            default: 
+                S = 0; //Erro handling can be added
         endcase
     end
 
