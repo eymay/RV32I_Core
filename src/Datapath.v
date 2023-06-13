@@ -117,22 +117,22 @@ always @(*) begin
         (`rdMEM != 0) &&
         (`rdMEM == `rs1EX)
     ) begin
-        funit_A = funit_S_MEM;
+        funit_A <= funit_S_MEM;
     end
     else if ((`instTypeWB != 4'd6 && `instTypeWB != 4'd2) &&
         (`rdWB != 0) &&
         (`rdWB == `rs1EX) &&
         (`rdMEM != `rs1EX)
     ) begin
-        funit_A = regfile_wr_din0_WB;
+        funit_A <= regfile_wr_din0_WB;
     end
     else begin
         case (`instTypeEX)
             // jal, jalr, auipc
-            4'd8, 4'd7, 4'd5: funit_A = pc;
+            4'd8, 4'd7, 4'd5: funit_A <= pc;
             // load, imm, store, reg, lui, brnch
-            4'd0, 4'd1, 4'd2, 4'd3, 4'd4, 4'd6: funit_A = regfile_rd_dout0_EX;
-            default: funit_A = -1; // this should never happen
+            4'd0, 4'd1, 4'd2, 4'd3, 4'd4, 4'd6: funit_A <= regfile_rd_dout0_EX;
+            default: funit_A <= -1; // this should never happen
         endcase
     end
 
@@ -140,24 +140,24 @@ always @(*) begin
         (`rdMEM != 0) &&
         (`rdMEM == `rs2EX)
     ) begin
-        funit_B = funit_S_MEM;
+        funit_B <= funit_S_MEM;
     end
     else if ((`instTypeWB != 4'd6 && `instTypeWB != 4'd2) &&
         (`rdWB != 0) &&
         (`rdWB == `rs2EX) &&
         (`rdMEM != `rs2EX)
     ) begin
-        funit_B = regfile_wr_din0_WB;
+        funit_B <= regfile_wr_din0_WB;
     end
     else begin
         case (`instTypeEX)
             // reg, branch
-            4'd3, 4'd6: funit_B = regfile_rd_dout1_EX;
+            4'd3, 4'd6: funit_B <= regfile_rd_dout1_EX;
             // store, load, auipc, lui, imm
-            4'd2, 4'd0, 4'd5, 4'd4, 4'd1: funit_B = immEX;
+            4'd2, 4'd0, 4'd5, 4'd4, 4'd1: funit_B <= immEX;
             // jal, jalr
-            4'd7, 4'd8: funit_B = 4;
-            default: funit_B = -1; // this should never happen
+            4'd7, 4'd8: funit_B <= 4;
+            default: funit_B <= -1; // this should never happen
         endcase
     end
 
@@ -174,93 +174,88 @@ always @(*) begin
 
     case (`instTypeEX)
         // reg
-        4'd3: funit_FS = {`fun3EX, `fun7EX};
+        4'd3: funit_FS <= {`fun3EX, `fun7EX};
         // imm
-        4'd1: funit_FS = {`fun3EX, 1'b0};
+        4'd1: funit_FS <= {`fun3EX, 1'b0};
         // branch
-        4'd6: funit_FS = {4'b0001};
-        default: funit_FS = 4'b0; // in all other cases do addition
+        4'd6: funit_FS <= {4'b0001};
+        default: funit_FS <= 4'b0; // in all other cases do addition
     endcase
 
     // datamem bindings
 
     // if store
-    if (`instTypeMEM == 4'd2) datamem_we0 = 1;
-    else datamem_we0 = 0;
+    if (`instTypeMEM == 4'd2) datamem_we0 <= 1;
+    else datamem_we0 <= 0;
 
-    //TODO %Warning-WIDTH: src/Datapath.v:188:22: Operator ASSIGNDLY expects 7 bits on the Assign RHS, but Assign RHS's SEL generates 30 bits.
-    datamem_rd_addr0 = funit_S_MEM[31:2];
-    //TODO src/Datapath.v:189:22: Operator ASSIGNDLY expects 7 bits on the Assign RHS, but Assign RHS's SEL generates 30 bits.
-    datamem_wr_addr0 = funit_S_MEM[31:2];
-    datamem_wr_din0 = regfile_rd_dout1_MEM;
+    datamem_rd_addr0 <= funit_S_MEM[31:2];
+    datamem_wr_addr0 <= funit_S_MEM[31:2];
 
-//TODO %Warning-CASEINCOMPLETE: src/Datapath.v:192:5: Case values incompletely covered (example pattern 0x3)
     case (`fun3MEM)
         // store word
-        3'b010: datamem_wr_strb = 3'b000;
+        3'b010: datamem_wr_strb <= 3'b000;
         // store half
-        3'b001: datamem_wr_strb = {1'b0, immMEM[1], 1'b1};
+        3'b001: datamem_wr_strb <= {1'b0, immMEM[1], 1'b1};
         // store byte
-        3'b000: datamem_wr_strb = {1'b1, immMEM[1:0]};
+        3'b000: datamem_wr_strb <= {1'b1, immMEM[1:0]};
     endcase
 
-//TODO %Warning-CASEINCOMPLETE: src/Datapath.v:201:5: Case values incompletely covered (example pattern 0x3)
     case (`fun3MEM)
         // LW
-        3'b010: datamem_out = datamem_rd_dout0;
+        3'b010: datamem_out <= datamem_rd_dout0;
         // LHU
         3'b101: begin
             // lower half
-            if (immMEM[1] == 1'b0) datamem_out = {{16{1'b0}}, datamem_rd_dout0[15:0]};
+            if (immMEM[1] == 1'b0) datamem_out <= {{16{1'b0}}, datamem_rd_dout0[15:0]};
             // upper half
-            else datamem_out = {{16{1'b0}}, datamem_rd_dout0[31:16]};
+            else datamem_out <= {{16{1'b0}}, datamem_rd_dout0[31:16]};
         end
         // LH
         3'b001: begin
             // lower half
-            if (immMEM[1] == 1'b0) datamem_out = {{16{datamem_rd_dout0[15]}}, datamem_rd_dout0[15:0]};
+            if (immMEM[1] == 1'b0) datamem_out <= {{16{datamem_rd_dout0[15]}}, datamem_rd_dout0[15:0]};
             // upper half
-            else datamem_out = {{16{datamem_rd_dout0[31]}}, datamem_rd_dout0[31:16]};
+            else datamem_out <= {{16{datamem_rd_dout0[31]}}, datamem_rd_dout0[31:16]};
         end
         // LBU
         3'b100: begin
             // lowest byte
-            if      (immMEM[1:0] == 2'b00) datamem_out = {{24{1'b0}}, datamem_rd_dout0[7:0]};
-            else if (immMEM[1:0] == 2'b01) datamem_out = {{24{1'b0}}, datamem_rd_dout0[15:8]};
-            else if (immMEM[1:0] == 2'b10) datamem_out = {{24{1'b0}}, datamem_rd_dout0[23:16]};
-            else datamem_out = {{24{1'b0}}, datamem_rd_dout0[31:24]};
+            if      (immMEM[1:0] == 2'b00) datamem_out <= {{24{1'b0}}, datamem_rd_dout0[7:0]};
+            else if (immMEM[1:0] == 2'b01) datamem_out <= {{24{1'b0}}, datamem_rd_dout0[15:8]};
+            else if (immMEM[1:0] == 2'b10) datamem_out <= {{24{1'b0}}, datamem_rd_dout0[23:16]};
+            else datamem_out <= {{24{1'b0}}, datamem_rd_dout0[31:24]};
         end
         // LB
         3'b000: begin
             // lowest byte
-            if      (immMEM[1:0] == 2'b00) datamem_out = {{24{datamem_rd_dout0[7]}}, datamem_rd_dout0[7:0]};
-            else if (immMEM[1:0] == 2'b01) datamem_out = {{24{datamem_rd_dout0[15]}}, datamem_rd_dout0[15:8]};
-            else if (immMEM[1:0] == 2'b10) datamem_out = {{24{datamem_rd_dout0[23]}}, datamem_rd_dout0[23:16]};
-            else datamem_out = {{24{datamem_rd_dout0[31]}}, datamem_rd_dout0[31:24]};
+            if      (immMEM[1:0] == 2'b00) datamem_out <= {{24{datamem_rd_dout0[7]}}, datamem_rd_dout0[7:0]};
+            else if (immMEM[1:0] == 2'b01) datamem_out <= {{24{datamem_rd_dout0[15]}}, datamem_rd_dout0[15:8]};
+            else if (immMEM[1:0] == 2'b10) datamem_out <= {{24{datamem_rd_dout0[23]}}, datamem_rd_dout0[23:16]};
+            else datamem_out <= {{24{datamem_rd_dout0[31]}}, datamem_rd_dout0[31:24]};
         end
     endcase
 
 
     // regfile bindings
 
-    regfile_rd_addr0 = `rs1ID;
-    regfile_rd_addr1 = `rs2ID;
-    regfile_wr_addr0 = `rdWB;
+    regfile_rd_addr0 <= `rs1ID;
+    regfile_rd_addr1 <= `rs2ID;
+    regfile_wr_addr0 <= `rdWB;
     
     case (`instTypeMEM)
         // reg, imm, auipc, jal, jalr
-        4'd3, 4'd1, 4'd5, 4'd7, 4'd8: regfile_wr_din0 = funit_S_MEM;
+        4'd3, 4'd1, 4'd5, 4'd7, 4'd8: regfile_wr_din0 <= funit_S_MEM;
         // load
-        4'd0: regfile_wr_din0 = datamem_out;
+        4'd0: regfile_wr_din0 <= datamem_out;
         // lui
-        4'd4: regfile_wr_din0 = immMEM;
-        default: regfile_wr_din0 = -1;
+        4'd4: regfile_wr_din0 <= immMEM;
+        default: regfile_wr_din0 <= -1;
     endcase
 
     case (`instTypeWB)
         // branch, store
-        4'd6, 4'd2: regfile_we0 = 1'b0;
-        default: regfile_we0 = 1'b1;
+        4'd6, 4'd2: regfile_we0 <= 1'b0;
+        default: regfile_we0 <= 1'b1;
     endcase
      
 end
