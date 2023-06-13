@@ -22,7 +22,9 @@ module ALU_LL (
     OR =  4'b1100,
     AND = 4'b1110;
 
-    wire signed [31:0]  A_signed = A, B_signed = B;
+    wire signed [31:0] A_signed, B_signed;
+    assign A_signed = A;
+    assign B_signed = B;
     
     
     always @(*) begin
