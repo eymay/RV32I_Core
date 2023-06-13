@@ -50,6 +50,7 @@ output wire [3:0] funit_ZCNVFlags;
 wire [31:0] funit_S, funit_S_MEM;
 
 // parts of datamem
+parameter DMEM_DEPTH = 128;
 output reg datamem_we0;
 output reg [6:0] datamem_rd_addr0;
 input wire [31:0] datamem_rd_dout0;
@@ -188,8 +189,8 @@ always @(*) begin
     if (`instTypeMEM == 4'd2) datamem_we0 = 1;
     else datamem_we0 = 0;
 
-    datamem_rd_addr0 = funit_S_MEM[31:2];
-    datamem_wr_addr0 = funit_S_MEM[31:2];
+    datamem_rd_addr0 = funit_S_MEM[$clog2(DMEM_DEPTH)+1:2];
+    datamem_wr_addr0 = funit_S_MEM[$clog2(DMEM_DEPTH)+1:2];
 
     case (`fun3MEM)
         // store word

@@ -12,8 +12,9 @@ wire [31:0] pc, pcEX;
 wire [3:0] ZCNVFlags;
 
 // parts of datamem
+parameter DATA_MEM_DEPTH = 128;
 wire datamem_we0;
-wire [6:0] datamem_rd_addr0;
+wire [6:0] datamem_rd_addr0; //TODO clog2 can be used for bit lengths
 wire [31:0] datamem_rd_dout0;
 wire [6:0] datamem_wr_addr0; // note: this value selects the word, not the byte. wr_addr0=1 -> risc-v addresses 4,5,6,7
 wire [31:0] datamem_wr_din0;
@@ -33,7 +34,7 @@ control_unit cu (
     .inst(inst),
     .r_for_pc(r_for_pc),
     .ZCNVFlags(ZCNVFlags));
-Datapath dp (
+Datapath #(.DMEM_DEPTH(DATA_MEM_DEPTH)) dp (
     .clk(clk),
     .rst(rst),
     .cwordID(cwordID),
@@ -55,7 +56,7 @@ Datapath dp (
 instr_mem instr_mem (
     .rd_addr0(pc[8:2]), // note: this must be changed according to the inst mem size
     .rd_dout0(inst));
-data_mem datamem (
+data_mem #(.DEPTH(DATA_MEM_DEPTH)) datamem (
     .clk(clk),
     .rst(rst),
     .rd_addr0(datamem_rd_addr0),
