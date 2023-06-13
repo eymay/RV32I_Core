@@ -2,7 +2,7 @@
 
 // iverilog tb/exponentiation_tb.v src/cpu.v src/control_unit.v src/Datapath.v src/instr_mem.v src/FunctionUnit.v src/data_mem.v src/immed_gen.v src/instr_dec.v src/pc_updater.v src/regfile.v src/ALU_LL.v src/ripple_carry_adder_subtractor.v src/shifter.v src/full_adder_LL_nodelay.v src/logical_unit.v src/shift_right.v src/mux_2to1.v src/pipeline_reg.v
 
-`define NUMBER_TO_SQUARE 5
+`define NUMBER_TO_SQUARE 7
 
 module exponentiation_tb ();
 
@@ -20,7 +20,6 @@ initial begin
 
     // initialize instruction memory:
     $readmemh("exponentiation_pc_fixed.mem", cpu.instr_mem.mem);
-    // $readmemh("exponentiation.mem", cpu.instr_mem.mem);
 
     // initialize registers:
     cpu.dp.regfile.mem[10] = `NUMBER_TO_SQUARE;
@@ -39,12 +38,6 @@ initial begin
         $display("\nt=%5d", $time);
 
         // Here input is x10 (a0) and output is the same register
-        $display("reg%2d (sp) : %2d", 2, cpu.dp.regfile.mem[2]);
-        $display("reg%2d (s0) : %2d", 8, cpu.dp.regfile.mem[8]);
-        $display("reg%2d (s1) : %2d", 9, cpu.dp.regfile.mem[9]);
-        $display("reg%2d (s2) : %2d", 18, cpu.dp.regfile.mem[18]);
-        $display("reg%2d (a5) : %2d", 15, cpu.dp.regfile.mem[15]);
-        $display("reg%2d (a4) : %2d", 14, cpu.dp.regfile.mem[14]);
         $display("reg%2d (a0) : %2d", 10, cpu.dp.regfile.mem[10]);
         $display("pc : %d", cpu.cu.pc_updater.pc_output);
 
@@ -52,7 +45,7 @@ initial begin
             $finish;
         end
 
-        if (cpu.cu.pc_updater.pc_output == 108*4) begin
+        if (cpu.cu.pc_updater.pc_output == 108*4) begin // the last instruction
             $finish;
         end
 

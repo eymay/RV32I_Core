@@ -1,7 +1,7 @@
 
 // iverilog src/pc_updater.v src/ripple_carry_adder_subtractor.v src/full_adder_LL_nodelay.v 
 
-module pc_updater (clk, rst, cword, imm, r, pc_input, pc_output, ZCNVFlags);
+module pc_updater (clk, rst, cword, imm, r, pc_input, pc_input_b, pc_output, ZCNVFlags);
 
 input wire [31:0] r;
 input wire [31:0] imm;
@@ -9,7 +9,7 @@ input wire clk, rst; // TODO: implement reset
 input wire [3:0] ZCNVFlags;
 output reg [31:0] pc_output;
 
-input wire [31:0] pc_input;
+input wire [31:0] pc_input, pc_input_b;
 input wire [22:0] cword;
 
 `define instType cword[3:0]
@@ -45,7 +45,18 @@ always @(posedge clk) begin
         A <= r;
     end
     else begin
-        A <= pc_input;
+        if ((`fun3==`BEQ && `Z_flag==1'b1) || 
+            (`fun3==`BNE && `Z_flag==1'b0) || 
+            (`fun3==`BLT && (`N_flag^`V_flag)==1'b1) || 
+            (`fun3==`BGE && (`N_flag^`V_flag)==1'b0) || 
+            (`fun3==`BLTU && `C_flag==1'b1) || 
+            (`fun3==`BGEU && `C_flag==1'b0)  // TODO: check on real bgeu instructions
+        ) begin
+            A <= pc_input_b;
+        end
+        else begin
+            A <= pc_input;
+        end
     end
 
     if (`instType==4'd8 || `instType==4'd7 || `instType==4'd5 || `instType==4'd6 && (

@@ -161,9 +161,9 @@ square:
 
 
 square:            
-bge  x15, x0, 8   ->    bge  x15, x0, 40           0007d463 -> 0207d463
-jal  x0, 16       ->    jal  x0, 80                0100006f -> 0500006f
-bltu x9, x14, -16 ->    bltu x9, x14, -80          fee4e8e3 -> fae4e8e3
+bge  x15, x0, 8   ->    bge  x15, x0, 40-16=24           0007d463 -> 0207d463 -> 0007dc63
+jal  x0, 16       ->    jal  x0, 80-16=64                0100006f -> 0500006f -> 0400006f
+bltu x9, x14, -16 ->    bltu x9, x14, -80-16=-96          fee4e8e3 -> fae4e8e3 -> fae4e0e3
 
 bge     x15, x0, .L2
 
