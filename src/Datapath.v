@@ -161,6 +161,14 @@ always @(*) begin
         endcase
     end
 
+    // forward from WB to MEM stage:
+    if ((`instTypeWB != 4'd6 && `instTypeWB != 4'd2) &&
+        (`rdWB != 0) &&
+        (`rdWB == `rs2MEM)
+    ) begin
+        regfile_rd_dout1_EXMEM.Q <= regfile_wr_din0_MEMWB.Q;
+    end
+
     case (`instTypeEX)
         // reg
         4'd3: funit_FS <= {`fun3EX, `fun7EX};
