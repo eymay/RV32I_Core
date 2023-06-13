@@ -28,7 +28,6 @@ control_unit cu (
     .cwordWB(cwordWB),
     .pc(pc),
     .pcEX(pcEX),
-    //TODO ImmID missing
     .immEX(immEX),
     .immMEM(immMEM),
     .inst(inst),

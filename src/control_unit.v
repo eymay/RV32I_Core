@@ -2,7 +2,7 @@
 
 module control_unit (clk, rst,
     r_for_pc, cwordID, cwordEX, cwordMEM, cwordWB,
-    inst, immID, immEX, immMEM,
+    inst, immEX, immMEM,
     pc, pcEX, ZCNVFlags);
 
 input wire clk, rst;
@@ -10,7 +10,8 @@ input wire clk, rst;
 input wire [31:0] r_for_pc;
 output wire [22:0] cwordID, cwordEX, cwordMEM, cwordWB;
 input wire [31:0] inst;
-output wire [31:0] immID, immEX, immMEM;
+wire [31:0] immID;
+input wire [31:0] immEX, immMEM;
 output wire [31:0] pc, pcEX;
 input wire [3:0] ZCNVFlags;
 
