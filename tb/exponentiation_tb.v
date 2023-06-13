@@ -20,6 +20,7 @@ initial begin
 
     // initialize instruction memory:
     $readmemh("exponentiation_pc_fixed.mem", cpu.instr_mem.mem);
+    // $readmemh("exponentiation.mem", cpu.instr_mem.mem);
 
     // initialize registers:
     cpu.dp.regfile.mem[10] = `NUMBER_TO_SQUARE;
@@ -38,10 +39,20 @@ initial begin
         $display("\nt=%5d", $time);
 
         // Here input is x10 (a0) and output is the same register
+        $display("reg%2d (sp) : %2d", 2, cpu.dp.regfile.mem[2]);
+        $display("reg%2d (s0) : %2d", 8, cpu.dp.regfile.mem[8]);
+        $display("reg%2d (s1) : %2d", 9, cpu.dp.regfile.mem[9]);
+        $display("reg%2d (s2) : %2d", 18, cpu.dp.regfile.mem[18]);
+        $display("reg%2d (a5) : %2d", 15, cpu.dp.regfile.mem[15]);
+        $display("reg%2d (a4) : %2d", 14, cpu.dp.regfile.mem[14]);
         $display("reg%2d (a0) : %2d", 10, cpu.dp.regfile.mem[10]);
         $display("pc : %d", cpu.cu.pc_updater.pc_output);
 
         if (cpu.dp.regfile.mem[10] == `NUMBER_TO_SQUARE * `NUMBER_TO_SQUARE) begin
+            $finish;
+        end
+
+        if (cpu.cu.pc_updater.pc_output == 108*4) begin
             $finish;
         end
 
