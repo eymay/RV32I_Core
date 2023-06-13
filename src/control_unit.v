@@ -1,6 +1,9 @@
 
 
-module control_unit (clk, rst, r_for_pc, cwordID, cwordEX, cwordMEM, cwordWB, inst, immEX, immMEM, pc, pcEX, ZCNVFlags);
+module control_unit (clk, rst,
+    r_for_pc, cwordID, cwordEX, cwordMEM, cwordWB,
+    inst, immID, immEX, immMEM,
+    pc, pcEX, ZCNVFlags);
 
 input wire clk, rst;
 
