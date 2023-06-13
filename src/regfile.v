@@ -35,8 +35,7 @@ module regfile (clk, rst, rd_addr0, rd_addr1, wr_addr0, wr_din0, we0, rd_dout0, 
             end
         end
         else begin
-        //TODO %Warning-WIDTH: src/regfile.v:32:23: Logical operator LOGAND expects 1 bit on the RHS, but RHS's VARREF 'wr_addr0' generates 5 bits.
-       if (we0 && rst && wr_addr0) begin
+       if (we0 && |wr_addr0) begin
             mem[wr_addr0] <= wr_din0;
         end
     end
