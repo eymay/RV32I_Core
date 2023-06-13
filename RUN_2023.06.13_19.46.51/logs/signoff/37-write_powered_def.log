@@ -1,0 +1,26 @@
+OpenROAD ceae0ad175e8b0183c3a64af79ba18139dcda63a 
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ODB-0222] Reading LEF file: /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/merged.nom.lef
+[WARNING ODB-0220] WARNING (LEFPARS-2036): SOURCE statement is obsolete in version 5.6 and later.
+The LEF parser will ignore this statement.
+To avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later. See file /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/merged.nom.lef at line 930.
+
+[INFO ODB-0223]     Created 13 technology layers
+[INFO ODB-0224]     Created 25 technology vias
+[INFO ODB-0225]     Created 441 library cells
+[INFO ODB-0226] Finished LEF file:  /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/merged.nom.lef
+[INFO ODB-0127] Reading DEF file: /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/results/routing/cpu.def
+[INFO ODB-0128] Design: cpu
+[INFO ODB-0094] 		Created 100000 Insts
+[INFO ODB-0130]     Created 8 pins.
+[INFO ODB-0131]     Created 111060 components and 517030 component-terminals.
+[INFO ODB-0132]     Created 2 special nets and 416804 connections.
+[INFO ODB-0133]     Created 32427 nets and 100190 connections.
+[INFO ODB-0134] Finished DEF file: /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/results/routing/cpu.def
+Top-level design name: cpu
+Found default power net 'VPWR'
+Found default ground net 'VGND'
+Found 1 power ports.
+Found 1 ground ports.
+Modified power connections of 111060/111060 cells.

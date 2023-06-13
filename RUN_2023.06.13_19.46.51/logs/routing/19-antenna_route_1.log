@@ -1,0 +1,169 @@
+OpenROAD ceae0ad175e8b0183c3a64af79ba18139dcda63a 
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO]: Reading ODB at '/openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/17-cpu.odb'…
+define_corners Typical
+read_liberty -corner Typical /home/eymen/.volare/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+[INFO]: Setting signal min routing layer to: met1 and clock min routing layer to met1. 
+[INFO]: Setting signal max routing layer to: met5 and clock max routing layer to met5. 
+-congestion_iterations 50 -verbose -congestion_report_file /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/routing/groute-congestion.rpt
+[INFO GRT-0020] Min routing layer: met1
+[INFO GRT-0021] Max routing layer: met5
+[INFO GRT-0022] Global adjustment: 30%
+[INFO GRT-0023] Grid origin: (0, 0)
+[INFO GRT-0043] No OR_DEFAULT vias defined.
+[INFO GRT-0088] Layer li1     Track-Pitch = 0.4600  line-2-Via Pitch: 0.3400
+[INFO GRT-0088] Layer met1    Track-Pitch = 0.3400  line-2-Via Pitch: 0.3400
+[INFO GRT-0088] Layer met2    Track-Pitch = 0.4600  line-2-Via Pitch: 0.3500
+[INFO GRT-0088] Layer met3    Track-Pitch = 0.6800  line-2-Via Pitch: 0.6150
+[INFO GRT-0088] Layer met4    Track-Pitch = 0.9200  line-2-Via Pitch: 1.0400
+[INFO GRT-0088] Layer met5    Track-Pitch = 3.4000  line-2-Via Pitch: 3.1100
+[INFO GRT-0019] Found 1904 clock nets.
+[INFO GRT-0001] Minimum degree: 2
+[INFO GRT-0002] Maximum degree: 20
+[INFO GRT-0003] Macros: 0
+[INFO GRT-0004] Blockages: 95640
+
+[INFO GRT-0053] Routing resources analysis:
+          Routing      Original      Derated      Resource
+Layer     Direction    Resources     Resources    Reduction (%)
+---------------------------------------------------------------
+li1        Vertical            0             0          0.00%
+met1       Horizontal     414720        201463          51.42%
+met2       Vertical       311040        208078          33.10%
+met3       Horizontal     207360        145295          29.93%
+met4       Vertical       124416         80106          35.61%
+met5       Horizontal      41472         20020          51.73%
+---------------------------------------------------------------
+
+[INFO GRT-0101] Running extra iterations to remove overflow.
+[INFO GRT-0197] Via related to pin nodes: 131060
+[INFO GRT-0198] Via related Steiner nodes: 5335
+[INFO GRT-0199] Via filling finished.
+[INFO GRT-0111] Final number of vias: 152597
+[INFO GRT-0112] Final usage 3D: 634555
+
+[INFO GRT-0096] Final congestion report:
+Layer         Resource        Demand        Usage (%)    Max H / Max V / Total Overflow
+---------------------------------------------------------------------------------------
+li1                  0             0            0.00%             0 /  0 /  0
+met1            201463         62566           31.06%             0 /  0 /  0
+met2            208078         72315           34.75%             0 /  0 /  0
+met3            145295         23397           16.10%             0 /  0 /  0
+met4             80106         17550           21.91%             0 /  0 /  0
+met5             20020           936            4.68%             0 /  0 /  0
+---------------------------------------------------------------------------------------
+Total           654962        176764           26.99%             0 /  0 /  0
+
+[INFO GRT-0018] Total wirelength: 1731051 um
+[INFO GRT-0014] Routed nets: 32427
+[INFO GRT-0006] Repairing antennas, iteration 1.
+[INFO GRT-0043] No OR_DEFAULT vias defined.
+[INFO GRT-0012] Found 155 antenna violations.
+[INFO GRT-0015] Inserted 322 diodes.
+[INFO GRT-0054] Using detailed placer to place 1 diodes.
+[INFO GRT-0009] rerouting 24642 nets.
+[INFO GRT-0001] Minimum degree: 2
+[INFO GRT-0002] Maximum degree: 20
+[INFO GRT-0006] Repairing antennas, iteration 2.
+[INFO GRT-0043] No OR_DEFAULT vias defined.
+[INFO GRT-0012] Found 52 antenna violations.
+[INFO GRT-0015] Inserted 84 diodes.
+[INFO GRT-0009] rerouting 755 nets.
+[INFO GRT-0001] Minimum degree: 2
+[INFO GRT-0002] Maximum degree: 20
+[INFO GRT-0006] Repairing antennas, iteration 3.
+[INFO GRT-0043] No OR_DEFAULT vias defined.
+[INFO GRT-0012] Found 8 antenna violations.
+[INFO GRT-0015] Inserted 16 diodes.
+[INFO GRT-0009] rerouting 99 nets.
+[INFO GRT-0001] Minimum degree: 2
+[INFO GRT-0002] Maximum degree: 20
+[INFO GRT-0006] Repairing antennas, iteration 4.
+[INFO GRT-0043] No OR_DEFAULT vias defined.
+[INFO GRT-0012] Found 3 antenna violations.
+[INFO GRT-0015] Inserted 3 diodes.
+[INFO GRT-0009] rerouting 8 nets.
+[INFO GRT-0001] Minimum degree: 4
+[INFO GRT-0002] Maximum degree: 20
+[INFO GRT-0006] Repairing antennas, iteration 5.
+[INFO GRT-0043] No OR_DEFAULT vias defined.
+[INFO GRT-0012] Found 2 antenna violations.
+[INFO GRT-0015] Inserted 2 diodes.
+[INFO GRT-0009] rerouting 2 nets.
+[INFO GRT-0001] Minimum degree: 6
+[INFO GRT-0002] Maximum degree: 16
+[INFO GRT-0006] Repairing antennas, iteration 6.
+[INFO GRT-0043] No OR_DEFAULT vias defined.
+[INFO GRT-0012] Found 2 antenna violations.
+[INFO GRT-0015] Inserted 2 diodes.
+[INFO GRT-0009] rerouting 2 nets.
+[INFO GRT-0001] Minimum degree: 7
+[INFO GRT-0002] Maximum degree: 17
+[INFO GRT-0006] Repairing antennas, iteration 7.
+[INFO GRT-0043] No OR_DEFAULT vias defined.
+[INFO GRT-0012] Found 2 antenna violations.
+[INFO GRT-0015] Inserted 2 diodes.
+[INFO GRT-0009] rerouting 2 nets.
+[INFO GRT-0001] Minimum degree: 8
+[INFO GRT-0002] Maximum degree: 18
+[INFO GRT-0006] Repairing antennas, iteration 8.
+[INFO GRT-0043] No OR_DEFAULT vias defined.
+[INFO GRT-0012] Found 2 antenna violations.
+[INFO GRT-0015] Inserted 2 diodes.
+[INFO GRT-0009] rerouting 2 nets.
+[INFO GRT-0001] Minimum degree: 9
+[INFO GRT-0002] Maximum degree: 19
+[INFO GRT-0006] Repairing antennas, iteration 9.
+[INFO GRT-0043] No OR_DEFAULT vias defined.
+[INFO GRT-0012] Found 2 antenna violations.
+[INFO GRT-0015] Inserted 2 diodes.
+[INFO GRT-0009] rerouting 2 nets.
+[INFO GRT-0001] Minimum degree: 10
+[INFO GRT-0002] Maximum degree: 20
+[INFO GRT-0006] Repairing antennas, iteration 10.
+[INFO GRT-0043] No OR_DEFAULT vias defined.
+[INFO GRT-0012] Found 2 antenna violations.
+[INFO GRT-0015] Inserted 2 diodes.
+[INFO GRT-0009] rerouting 2 nets.
+[INFO GRT-0001] Minimum degree: 11
+[INFO GRT-0002] Maximum degree: 21
+[INFO GRT-0006] Repairing antennas, iteration 11.
+[INFO GRT-0043] No OR_DEFAULT vias defined.
+[INFO GRT-0012] Found 2 antenna violations.
+[INFO GRT-0015] Inserted 2 diodes.
+[INFO GRT-0009] rerouting 2 nets.
+[INFO GRT-0001] Minimum degree: 12
+[INFO GRT-0002] Maximum degree: 22
+[INFO GRT-0006] Repairing antennas, iteration 12.
+[INFO GRT-0043] No OR_DEFAULT vias defined.
+[INFO GRT-0012] Found 2 antenna violations.
+[INFO GRT-0015] Inserted 2 diodes.
+[INFO GRT-0009] rerouting 2 nets.
+[INFO GRT-0001] Minimum degree: 13
+[INFO GRT-0002] Maximum degree: 23
+[INFO GRT-0006] Repairing antennas, iteration 13.
+[INFO GRT-0043] No OR_DEFAULT vias defined.
+[INFO GRT-0012] Found 2 antenna violations.
+[INFO GRT-0015] Inserted 2 diodes.
+[INFO GRT-0009] rerouting 2 nets.
+[INFO GRT-0001] Minimum degree: 14
+[INFO GRT-0002] Maximum degree: 24
+[INFO GRT-0006] Repairing antennas, iteration 14.
+[INFO GRT-0043] No OR_DEFAULT vias defined.
+[INFO GRT-0012] Found 2 antenna violations.
+[INFO GRT-0015] Inserted 2 diodes.
+[INFO GRT-0009] rerouting 2 nets.
+[INFO GRT-0001] Minimum degree: 15
+[INFO GRT-0002] Maximum degree: 25
+[INFO GRT-0006] Repairing antennas, iteration 15.
+[INFO GRT-0043] No OR_DEFAULT vias defined.
+[INFO GRT-0012] Found 2 antenna violations.
+[INFO GRT-0015] Inserted 2 diodes.
+[INFO GRT-0009] rerouting 2 nets.
+[INFO GRT-0001] Minimum degree: 16
+[INFO GRT-0002] Maximum degree: 26
+Setting global connections for newly added cells…
+Writing OpenROAD database to '/openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/routing/19-global_1.odb'…
+Writing layout to '/openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/routing/19-global_1.def'…
+Writing routing guides to '/openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/routing/19-global_1.guide'…

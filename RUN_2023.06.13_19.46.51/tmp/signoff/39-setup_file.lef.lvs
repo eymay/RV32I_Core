@@ -1,0 +1,1 @@
+lvs {/openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/results/signoff/cpu.spice cpu} {/openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/signoff/36-cpu.pnl.v cpu} /home/eymen/.volare/sky130A/libs.tech/netgen/sky130A_setup.tcl /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/signoff/39-cpu.lef.lvs.log -json

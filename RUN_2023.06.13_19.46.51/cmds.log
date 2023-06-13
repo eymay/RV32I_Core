@@ -1,0 +1,166 @@
+Tue Jun 13 19:46:51 UTC 2023 - Executing "openroad -exit -no_init -python /openlane/scripts/odbpy/lefutil.py get_metal_layers -o /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/layers.list /home/eymen/.volare/sky130A/libs.ref/sky130_fd_sc_hd/techlef/sky130_fd_sc_hd__nom.tlef"
+
+Tue Jun 13 19:46:51 UTC 2023 - Executing "/openlane/scripts/mergeLef.py -o /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/merged.nom.lef -i /home/eymen/.volare/sky130A/libs.ref/sky130_fd_sc_hd/techlef/sky130_fd_sc_hd__nom.tlef {/home/eymen/.volare/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_ef_sc_hd.lef /home/eymen/.volare/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_fd_sc_hd.lef} |& tee /dev/null"
+
+Tue Jun 13 19:46:51 UTC 2023 - Executing "/openlane/scripts/mergeLef.py -o /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/merged.min.lef -i /home/eymen/.volare/sky130A/libs.ref/sky130_fd_sc_hd/techlef/sky130_fd_sc_hd__min.tlef {/home/eymen/.volare/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_ef_sc_hd.lef /home/eymen/.volare/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_fd_sc_hd.lef} |& tee /dev/null"
+
+Tue Jun 13 19:46:51 UTC 2023 - Executing "/openlane/scripts/mergeLef.py -o /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/merged.max.lef -i /home/eymen/.volare/sky130A/libs.ref/sky130_fd_sc_hd/techlef/sky130_fd_sc_hd__max.tlef {/home/eymen/.volare/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_ef_sc_hd.lef /home/eymen/.volare/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_fd_sc_hd.lef} |& tee /dev/null"
+
+Tue Jun 13 19:46:51 UTC 2023 - Executing "python3 /openlane/scripts/mergeLib.py --output /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/synthesis/merged.lib --name sky130A_merged /home/eymen/.volare/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib"
+
+Tue Jun 13 19:46:52 UTC 2023 - Executing "python3 /openlane/scripts/libtrim.py --cell-file /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/synthesis/trimmed.lib.exclude.list --output /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/synthesis/trimmed.lib /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/synthesis/merged.lib"
+
+Tue Jun 13 19:46:52 UTC 2023 - Executing "python3 /openlane/scripts/libtrim.py --cell-file /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/cts/cts.lib.exclude.list --output /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/cts/cts.lib /home/eymen/.volare/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib"
+
+Tue Jun 13 19:46:52 UTC 2023 - Executing "python3 /openlane/scripts/libtrim.py --cell-file /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/cts/cts-fastest.lib.exclude.list --output /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/cts/cts-fastest.lib /home/eymen/.volare/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ff_n40C_1v95.lib"
+
+Tue Jun 13 19:46:53 UTC 2023 - Executing "python3 /openlane/scripts/libtrim.py --cell-file /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/cts/cts-slowest.lib.exclude.list --output /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/cts/cts-slowest.lib /home/eymen/.volare/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ss_100C_1v60.lib"
+
+Tue Jun 13 19:46:53 UTC 2023 - Executing "python3 /openlane/scripts/new_tracks.py -i /home/eymen/.volare/sky130A/libs.tech/openlane/sky130_fd_sc_hd/tracks.info -o /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/routing/config.tracks"
+
+Tue Jun 13 19:46:53 UTC 2023 - Executing "echo {OpenLane d9c11994e08e70b51df8cce5dddb545262cc58a4} > /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/OPENLANE_VERSION"
+
+Tue Jun 13 19:46:53 UTC 2023 - Executing "bash -c {verilator  --lint-only  -Wall  --Wno-DECLFILENAME  --top-module cpu  -I /home/eymen/.volare/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v -I /home/eymen/.volare/sky130A/libs.ref/sky130_fd_sc_hd/verilog/primitives.v /openlane/designs/RV32_pipelined/src/cpu.v /openlane/designs/RV32_pipelined/src/logical_unit.v /openlane/designs/RV32_pipelined/src/shift_right.v /openlane/designs/RV32_pipelined/src/ALU_LL.v /openlane/designs/RV32_pipelined/src/instr_dec.v /openlane/designs/RV32_pipelined/src/Datapath.v /openlane/designs/RV32_pipelined/src/shifter.v /openlane/designs/RV32_pipelined/src/control_unit.v /openlane/designs/RV32_pipelined/src/FunctionUnit.v /openlane/designs/RV32_pipelined/src/mux_2to1.v /openlane/designs/RV32_pipelined/src/instr_mem.v /openlane/designs/RV32_pipelined/src/pc_updater.v /openlane/designs/RV32_pipelined/src/immed_gen.v /openlane/designs/RV32_pipelined/src/pipeline_reg.v /openlane/designs/RV32_pipelined/src/Memblock.v /openlane/designs/RV32_pipelined/src/data_mem.v /openlane/designs/RV32_pipelined/src/regfile.v /openlane/designs/RV32_pipelined/src/full_adder_LL_nodelay.v /openlane/designs/RV32_pipelined/src/ripple_carry_adder_subtractor.v -Wno-fatal --relative-includes |& tee /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/synthesis/verilator.log /dev/null}"
+
+Tue Jun 13 19:46:53 UTC 2023 - Executing "sed -E {s/^([[:space:]]+)pg_pin(.*)/\1pin\2\n\1    direction : "inout";/g} /home/eymen/.volare/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib > /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/synthesis/1-sky130_fd_sc_hd__tt_025C_1v80.no_pg.lib"
+
+Tue Jun 13 19:46:53 UTC 2023 - Executing "sed -E {s/^([[:space:]]+)pg_pin(.*)/\1pin\2\n\1    direction : "inout";/g} /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/synthesis/trimmed.lib > /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/synthesis/1-trimmed.no_pg.lib"
+
+Tue Jun 13 19:46:54 UTC 2023 - Executing "yosys -c /openlane/scripts/yosys/synth.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/synthesis/1-synthesis.log"
+
+Tue Jun 13 19:47:44 UTC 2023 - Executing "sed -i.bak -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/openlane\/designs\/RV32_pipelined\/runs\/RUN_2023.06.13_19.46.51\/results\/synthesis\/cpu.v/} /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/config.tcl"
+
+Tue Jun 13 19:47:44 UTC 2023 - Executing "sed -i.bak /defparam/d /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/results/synthesis/cpu.v"
+
+Tue Jun 13 19:47:44 UTC 2023 - Executing "sta -exit -no_init /openlane/scripts/openroad/sta/multi_corner.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/synthesis/2-sta.log"
+
+Tue Jun 13 19:47:46 UTC 2023 - Executing "openroad -exit /openlane/scripts/openroad/floorplan.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/floorplan/3-initial_fp.log"
+
+Tue Jun 13 19:47:47 UTC 2023 - Executing "openroad -exit -no_init -python /openlane/scripts/odbpy/defutil.py extract_core_dims --output-data /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/dimensions.txt --input-lef /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/merged.nom.lef /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/floorplan/3-initial_fp.def"
+
+Tue Jun 13 19:47:47 UTC 2023 - Executing "openroad -exit /openlane/scripts/openroad/ioplacer.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/floorplan/4-io.log"
+
+Tue Jun 13 19:47:48 UTC 2023 - Executing "openroad -exit /openlane/scripts/openroad/tapcell.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/floorplan/5-tap.log"
+
+Tue Jun 13 19:47:49 UTC 2023 - Executing "openroad -exit /openlane/scripts/openroad/pdn.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/floorplan/6-pdn.log"
+
+Tue Jun 13 19:47:50 UTC 2023 - Executing "openroad -exit /openlane/scripts/openroad/gpl.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/placement/7-global.log"
+
+Tue Jun 13 19:48:32 UTC 2023 - Executing "sed -i.bak -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/openlane\/designs\/RV32_pipelined\/runs\/RUN_2023.06.13_19.46.51\/tmp\/placement\/7-global.nl.v/} /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/config.tcl"
+
+Tue Jun 13 19:48:32 UTC 2023 - Executing "openroad -exit /openlane/scripts/openroad/sta/multi_corner.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/placement/8-gpl_sta.log"
+
+Tue Jun 13 19:48:36 UTC 2023 - Executing "openroad -exit /openlane/scripts/openroad/resizer.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/placement/9-resizer.log"
+
+Tue Jun 13 19:48:46 UTC 2023 - Executing "sed -i.bak -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/openlane\/designs\/RV32_pipelined\/runs\/RUN_2023.06.13_19.46.51\/tmp\/placement\/9-resizer.nl.v/} /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/config.tcl"
+
+Tue Jun 13 19:48:46 UTC 2023 - Executing "openroad -exit /openlane/scripts/openroad/dpl.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/placement/10-detailed.log"
+
+Tue Jun 13 19:48:47 UTC 2023 - Executing "sed -i.bak -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/openlane\/designs\/RV32_pipelined\/runs\/RUN_2023.06.13_19.46.51\/results\/placement\/cpu.nl.v/} /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/config.tcl"
+
+Tue Jun 13 19:48:48 UTC 2023 - Executing "openroad -exit /openlane/scripts/openroad/sta/multi_corner.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/placement/11-dpl_sta.log"
+
+Tue Jun 13 19:48:51 UTC 2023 - Executing "openroad -exit /openlane/scripts/openroad/cts.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/cts/12-cts.log"
+
+Tue Jun 13 19:49:22 UTC 2023 - Executing "openroad -exit /openlane/scripts/openroad/sta/multi_corner.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/cts/13-cts_sta.log"
+
+Tue Jun 13 19:49:27 UTC 2023 - Executing "openroad -exit /openlane/scripts/openroad/resizer_timing.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/cts/14-resizer.log"
+
+Tue Jun 13 19:49:53 UTC 2023 - Executing "sed -i.bak -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/openlane\/designs\/RV32_pipelined\/runs\/RUN_2023.06.13_19.46.51\/tmp\/cts\/14-cpu.resized.nl.v/} /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/config.tcl"
+
+Tue Jun 13 19:49:53 UTC 2023 - Executing "openroad -exit /openlane/scripts/openroad/resizer_routing_design.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/routing/15-resizer_design.log"
+
+Tue Jun 13 19:50:08 UTC 2023 - Executing "sed -i.bak -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/openlane\/designs\/RV32_pipelined\/runs\/RUN_2023.06.13_19.46.51\/tmp\/15-cpu.nl.v/} /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/config.tcl"
+
+Tue Jun 13 19:50:08 UTC 2023 - Executing "openroad -exit /openlane/scripts/openroad/sta/multi_corner.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/routing/16-rsz_design_sta.log"
+
+Tue Jun 13 19:50:14 UTC 2023 - Executing "openroad -exit /openlane/scripts/openroad/resizer_routing_timing.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/routing/17-resizer_timing.log"
+
+Tue Jun 13 19:50:28 UTC 2023 - Executing "sed -i.bak -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/openlane\/designs\/RV32_pipelined\/runs\/RUN_2023.06.13_19.46.51\/tmp\/17-cpu.nl.v/} /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/config.tcl"
+
+Tue Jun 13 19:50:28 UTC 2023 - Executing "openroad -exit /openlane/scripts/openroad/sta/multi_corner.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/routing/18-rsz_timing_sta.log"
+
+Tue Jun 13 19:50:34 UTC 2023 - Executing "openroad -exit /openlane/scripts/openroad/groute.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/routing/19-global.log"
+
+Tue Jun 13 19:50:59 UTC 2023 - Executing "openroad -exit -no_init -python /openlane/scripts/odbpy/defutil.py replace_instance_prefixes --original-prefix ANTENNA --new-prefix INSDIODE1 --input-lef /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/merged.nom.lef --output-def /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/17-cpu.def --output /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/17-cpu.odb /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/17-cpu.odb |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/routing/19-antenna_diodes_1.log"
+
+Tue Jun 13 19:51:00 UTC 2023 - Executing "openroad -exit /openlane/scripts/openroad/groute.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/routing/19-antenna_route_1.log"
+
+Tue Jun 13 19:51:26 UTC 2023 - Executing "openroad -exit /openlane/scripts/openroad/write_views.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/routing/19-global_write_netlist.log"
+
+Tue Jun 13 19:51:26 UTC 2023 - Executing "sed -i.bak -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/openlane\/designs\/RV32_pipelined\/runs\/RUN_2023.06.13_19.46.51\/tmp\/routing\/global.nl.v/} /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/config.tcl"
+
+Tue Jun 13 19:51:27 UTC 2023 - Executing "openroad -exit /openlane/scripts/openroad/sta/multi_corner.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/routing/21-grt_sta.log"
+
+Tue Jun 13 19:51:30 UTC 2023 - Executing "openroad -exit /openlane/scripts/openroad/fill.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/routing/22-fill.log"
+
+Tue Jun 13 19:51:32 UTC 2023 - Executing "sed -i.bak -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/openlane\/designs\/RV32_pipelined\/runs\/RUN_2023.06.13_19.46.51\/tmp\/routing\/22-fill.nl.v/} /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/config.tcl"
+
+Tue Jun 13 19:51:32 UTC 2023 - Executing "openroad -exit /openlane/scripts/openroad/droute.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/routing/23-detailed.log"
+
+Tue Jun 13 19:59:40 UTC 2023 - Executing "sed -i.bak -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/openlane\/designs\/RV32_pipelined\/runs\/RUN_2023.06.13_19.46.51\/results\/routing\/cpu.nl.v/} /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/config.tcl"
+
+Tue Jun 13 19:59:40 UTC 2023 - Executing "python3 /openlane/scripts/drc_rosetta.py tr to_klayout -o /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/reports/routing/drt.klayout.xml --design-name cpu /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/reports/routing/drt.drc"
+
+Tue Jun 13 19:59:40 UTC 2023 - Executing "openroad -exit -no_init -python /openlane/scripts/odbpy/wire_lengths.py --report-out /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/reports/routing/24-wire_lengths.csv --input-lef /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/merged.nom.lef --output-def /dev/null --output /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/results/routing/cpu.odb /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/results/routing/cpu.odb |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/routing/24-wire_lengths.log"
+
+Tue Jun 13 19:59:42 UTC 2023 - Executing "openroad -exit /openlane/scripts/openroad/rcx.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/signoff/25-parasitics_extraction.min.log"
+
+Tue Jun 13 19:59:50 UTC 2023 - Executing "sta -exit -no_init /openlane/scripts/openroad/sta/multi_corner.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/signoff/26-rcx_mcsta.min.log"
+
+Tue Jun 13 20:00:17 UTC 2023 - Executing "openroad -exit /openlane/scripts/openroad/rcx.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/signoff/27-parasitics_extraction.max.log"
+
+Tue Jun 13 20:00:25 UTC 2023 - Executing "sta -exit -no_init /openlane/scripts/openroad/sta/multi_corner.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/signoff/28-rcx_mcsta.max.log"
+
+Tue Jun 13 20:00:55 UTC 2023 - Executing "openroad -exit /openlane/scripts/openroad/rcx.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/signoff/29-parasitics_extraction.nom.log"
+
+Tue Jun 13 20:01:03 UTC 2023 - Executing "sta -exit -no_init /openlane/scripts/openroad/sta/multi_corner.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/signoff/30-rcx_mcsta.nom.log"
+
+Tue Jun 13 20:01:31 UTC 2023 - Executing "sta -exit -no_init /openlane/scripts/openroad/sta/multi_corner.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/signoff/31-rcx_sta.log"
+
+Tue Jun 13 20:01:39 UTC 2023 - Executing "openroad -exit /openlane/scripts/openroad/irdrop.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/signoff/32-irdrop.log"
+
+Tue Jun 13 20:01:43 UTC 2023 - Executing "magic -noconsole -dnull -rcfile /home/eymen/.volare/sky130A/libs.tech/magic/sky130A.magicrc < /openlane/scripts/magic/wrapper.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/signoff/33-gdsii.log"
+
+Tue Jun 13 20:02:08 UTC 2023 - Executing "magic -noconsole -dnull -rcfile /home/eymen/.volare/sky130A/libs.tech/magic/sky130A.magicrc < /openlane/scripts/magic/wrapper.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/signoff/33-gds_ptrs.log"
+
+Tue Jun 13 20:02:27 UTC 2023 - Executing "sed -i.bak -n {/^<< properties >>/,/^<< end >>/p} /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/signoff/gds_ptrs.mag"
+
+Tue Jun 13 20:02:27 UTC 2023 - Executing "magic -noconsole -dnull -rcfile /home/eymen/.volare/sky130A/libs.tech/magic/sky130A.magicrc < /openlane/scripts/magic/wrapper.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/signoff/33-lef.log"
+
+Tue Jun 13 20:03:17 UTC 2023 - Executing "magic -noconsole -dnull -rcfile /home/eymen/.volare/sky130A/libs.tech/magic/sky130A.magicrc < /openlane/scripts/magic/wrapper.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/signoff/33-maglef.log"
+
+Tue Jun 13 20:03:17 UTC 2023 - Executing "python3 /openlane/scripts/klayout/stream_out.py --output /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/results/signoff/cpu.klayout.gds --lyt /home/eymen/.volare/sky130A/libs.tech/klayout/tech/sky130A.lyt --lym /home/eymen/.volare/sky130A/libs.tech/klayout/tech/sky130A.map --lyp /home/eymen/.volare/sky130A/libs.tech/klayout/tech/sky130A.lyp --top cpu --with-gds-file /home/eymen/.volare/sky130A/libs.ref/sky130_fd_sc_hd/gds/sky130_fd_sc_hd.gds --input-lef /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/merged.nom.lef /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/results/routing/cpu.def |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/signoff/34-gdsii-klayout.log"
+
+Tue Jun 13 20:03:20 UTC 2023 - Executing "klayout -b -r /openlane/scripts/klayout/xor.drc -rd a=/openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/results/signoff/cpu.gds -rd b=/openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/results/signoff/cpu.klayout.gds -rd jobs=6 -rd rdb_out=/openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/reports/signoff/35-xor.xml -rd ignore=81/14 -rd rpt_out=/openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/reports/signoff/35-xor.rpt |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/signoff/35-xor.log"
+
+Tue Jun 13 20:04:06 UTC 2023 - Executing "magic -noconsole -dnull -rcfile /home/eymen/.volare/sky130A/libs.tech/magic/sky130A.magicrc < /openlane/scripts/magic/wrapper.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/signoff/36-spice.log"
+
+Tue Jun 13 20:05:21 UTC 2023 - Executing "openroad -exit -no_init -python /openlane/scripts/odbpy/power_utils.py write_powered_def --output /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/signoff/36-cpu.p.def --input-lef /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/merged.nom.lef --power-port VPWR --ground-port VGND --powered-netlist {} /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/results/routing/cpu.def |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/signoff/37-write_powered_def.log"
+
+Tue Jun 13 20:05:24 UTC 2023 - Executing "openroad -exit /openlane/scripts/openroad/write_views.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/signoff/37-write_powered_verilog.log"
+
+Tue Jun 13 20:05:28 UTC 2023 - Executing "sed -i.bak -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/openlane\/designs\/RV32_pipelined\/runs\/RUN_2023.06.13_19.46.51\/tmp\/signoff\/36-cpu.nl.v/} /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/config.tcl"
+
+Tue Jun 13 20:05:28 UTC 2023 - Executing "netgen -batch source /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/signoff/39-setup_file.lef.lvs |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/signoff/39-lvs.lef.log"
+
+Tue Jun 13 20:05:38 UTC 2023 - Executing "magic -noconsole -dnull -rcfile /home/eymen/.volare/sky130A/libs.tech/magic/sky130A.magicrc < /openlane/scripts/magic/wrapper.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/signoff/40-drc.log"
+
+Tue Jun 13 20:11:16 UTC 2023 - Executing "python3 /openlane/scripts/drc_rosetta.py magic to_tcl -o /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/reports/signoff/drc.tcl /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/reports/signoff/drc.rpt"
+
+Tue Jun 13 20:11:16 UTC 2023 - Executing "python3 /openlane/scripts/drc_rosetta.py magic to_tr -o /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/reports/signoff/drc.tr /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/reports/signoff/drc.rpt"
+
+Tue Jun 13 20:11:16 UTC 2023 - Executing "python3 /openlane/scripts/drc_rosetta.py tr to_klayout -o /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/reports/signoff/drc.klayout.xml --design-name cpu /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/reports/signoff/drc.tr"
+
+Tue Jun 13 20:11:16 UTC 2023 - Executing "python3 /openlane/scripts/drc_rosetta.py magic to_rdb -o /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/reports/signoff/drc.rdb /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/reports/signoff/drc.rpt"
+
+Tue Jun 13 20:11:16 UTC 2023 - Executing "openroad -exit /openlane/scripts/openroad/antenna_check.tcl |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/signoff/41-antenna.log"
+
+Tue Jun 13 20:11:21 UTC 2023 - Executing "python3 /openlane/scripts/extract_antenna_violators.py --output /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/reports/signoff/41-antenna_violators.rpt /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/signoff/41-antenna.log"
+
+Tue Jun 13 20:11:22 UTC 2023 - Executing "awk -v vdd=VPWR -v gnd=VGND -f /home/eymen/.volare/sky130A/libs.tech/openlane/cvc/power.awk /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/signoff/36-cpu.nl.v > /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/signoff/cpu.power"
+
+Tue Jun 13 20:11:22 UTC 2023 - Executing "awk -f /home/eymen/.volare/sky130A/libs.tech/openlane/cvc/cdl.awk /home/eymen/.volare/sky130A/libs.ref/sky130_fd_sc_hd/cdl/sky130_fd_sc_hd.cdl /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/results/signoff/cpu.lef.spice > /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/tmp/signoff/cpu.cdl"
+
+Tue Jun 13 20:11:22 UTC 2023 - Executing "cvc_rv /home/eymen/.volare/sky130A/libs.tech/openlane/cvc/cvcrc |& tee /dev/null /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/logs/signoff/42-erc_screen.log"
+

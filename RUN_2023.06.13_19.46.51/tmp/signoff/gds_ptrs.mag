@@ -1,0 +1,6 @@
+<< properties >>
+string FIXED_BBOX 0 0 200000 200000
+string GDS_END 79850940
+string GDS_FILE /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/results/signoff/cpu.magic.gds
+string GDS_START 1123222
+<< end >>

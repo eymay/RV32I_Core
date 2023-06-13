@@ -1,0 +1,155 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 1686686597
+<< obsli1 >>
+rect 1104 2159 198812 197489
+<< obsm1 >>
+rect 14 2128 198890 197520
+<< metal2 >>
+rect 70214 199200 70270 200000
+rect 199658 199200 199714 200000
+rect 18 0 74 800
+rect 129462 0 129518 800
+<< obsm2 >>
+rect 20 199144 70158 199322
+rect 70326 199144 199602 199322
+rect 20 856 199714 199144
+rect 130 800 129406 856
+rect 129574 800 199714 856
+<< metal3 >>
+rect 0 136688 800 136808
+rect 199200 62568 200000 62688
+<< obsm3 >>
+rect 800 136888 199719 197505
+rect 880 136608 199719 136888
+rect 800 62768 199719 136608
+rect 800 62488 199120 62768
+rect 800 2143 199719 62488
+<< metal4 >>
+rect 4208 2128 4528 197520
+rect 4868 2128 5188 197520
+rect 34928 2128 35248 197520
+rect 35588 2128 35908 197520
+rect 65648 2128 65968 197520
+rect 66308 2128 66628 197520
+rect 96368 2128 96688 197520
+rect 97028 2128 97348 197520
+rect 127088 2128 127408 197520
+rect 127748 2128 128068 197520
+rect 157808 2128 158128 197520
+rect 158468 2128 158788 197520
+rect 188528 2128 188848 197520
+rect 189188 2128 189508 197520
+<< obsm4 >>
+rect 9259 35667 34848 197301
+rect 35328 35667 35508 197301
+rect 35988 35667 65568 197301
+rect 66048 35667 66228 197301
+rect 66708 35667 96288 197301
+rect 96768 35667 96948 197301
+rect 97428 35667 127008 197301
+rect 127488 35667 127668 197301
+rect 128148 35667 157728 197301
+rect 158208 35667 158388 197301
+rect 158868 35667 188448 197301
+rect 188928 35667 189108 197301
+rect 189588 35667 197458 197301
+<< metal5 >>
+rect 1056 189822 198860 190142
+rect 1056 189162 198860 189482
+rect 1056 159186 198860 159506
+rect 1056 158526 198860 158846
+rect 1056 128550 198860 128870
+rect 1056 127890 198860 128210
+rect 1056 97914 198860 98234
+rect 1056 97254 198860 97574
+rect 1056 67278 198860 67598
+rect 1056 66618 198860 66938
+rect 1056 36642 198860 36962
+rect 1056 35982 198860 36302
+rect 1056 6006 198860 6326
+rect 1056 5346 198860 5666
+<< obsm5 >>
+rect 14468 129190 197500 129700
+rect 14468 98554 197500 127570
+rect 14468 67918 197500 96934
+rect 14468 55940 197500 66298
+<< labels >>
+rlabel metal5 s 1056 189822 198860 190142 6 VGND
+port 1 nsew ground default
+rlabel metal5 s 1056 159186 198860 159506 6 VGND
+port 1 nsew ground default
+rlabel metal5 s 1056 128550 198860 128870 6 VGND
+port 1 nsew ground default
+rlabel metal5 s 1056 97914 198860 98234 6 VGND
+port 1 nsew ground default
+rlabel metal5 s 1056 67278 198860 67598 6 VGND
+port 1 nsew ground default
+rlabel metal5 s 1056 36642 198860 36962 6 VGND
+port 1 nsew ground default
+rlabel metal5 s 1056 6006 198860 6326 6 VGND
+port 1 nsew ground default
+rlabel metal4 s 189188 2128 189508 197520 6 VGND
+port 1 nsew ground default
+rlabel metal4 s 158468 2128 158788 197520 6 VGND
+port 1 nsew ground default
+rlabel metal4 s 127748 2128 128068 197520 6 VGND
+port 1 nsew ground default
+rlabel metal4 s 97028 2128 97348 197520 6 VGND
+port 1 nsew ground default
+rlabel metal4 s 66308 2128 66628 197520 6 VGND
+port 1 nsew ground default
+rlabel metal4 s 35588 2128 35908 197520 6 VGND
+port 1 nsew ground default
+rlabel metal4 s 4868 2128 5188 197520 6 VGND
+port 1 nsew ground default
+rlabel metal5 s 1056 189162 198860 189482 6 VPWR
+port 2 nsew power default
+rlabel metal5 s 1056 158526 198860 158846 6 VPWR
+port 2 nsew power default
+rlabel metal5 s 1056 127890 198860 128210 6 VPWR
+port 2 nsew power default
+rlabel metal5 s 1056 97254 198860 97574 6 VPWR
+port 2 nsew power default
+rlabel metal5 s 1056 66618 198860 66938 6 VPWR
+port 2 nsew power default
+rlabel metal5 s 1056 35982 198860 36302 6 VPWR
+port 2 nsew power default
+rlabel metal5 s 1056 5346 198860 5666 6 VPWR
+port 2 nsew power default
+rlabel metal4 s 188528 2128 188848 197520 6 VPWR
+port 2 nsew power default
+rlabel metal4 s 157808 2128 158128 197520 6 VPWR
+port 2 nsew power default
+rlabel metal4 s 127088 2128 127408 197520 6 VPWR
+port 2 nsew power default
+rlabel metal4 s 96368 2128 96688 197520 6 VPWR
+port 2 nsew power default
+rlabel metal4 s 65648 2128 65968 197520 6 VPWR
+port 2 nsew power default
+rlabel metal4 s 34928 2128 35248 197520 6 VPWR
+port 2 nsew power default
+rlabel metal4 s 4208 2128 4528 197520 6 VPWR
+port 2 nsew power default
+rlabel metal3 s 0 136688 800 136808 6 ZCNVFlags[0]
+port 3 nsew
+rlabel metal2 s 129462 0 129518 800 6 ZCNVFlags[1]
+port 4 nsew
+rlabel metal2 s 18 0 74 800 6 ZCNVFlags[2]
+port 5 nsew
+rlabel metal2 s 70214 199200 70270 200000 6 ZCNVFlags[3]
+port 6 nsew
+rlabel metal2 s 199658 199200 199714 200000 6 clk
+port 7 nsew
+rlabel metal3 s 199200 62568 200000 62688 6 rst
+port 8 nsew
+<< properties >>
+string FIXED_BBOX 0 0 200000 200000
+string LEFclass BLOCK
+string LEFview TRUE
+string GDS_END 79850940
+string GDS_FILE /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/results/signoff/cpu.magic.gds
+string GDS_START 1123222
+<< end >>
+

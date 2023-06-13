@@ -1,0 +1,7 @@
+Warning: /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/results/routing/cpu.nl.v line 121301, module sky130_fd_sc_hd__tapvpwrvgnd_1 not found. Creating black box for TAP_718.
+Warning: /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/results/routing/cpu.nl.v line 147056, module sky130_ef_sc_hd__decap_12 not found. Creating black box for FILLER_0_0_9.
+Warning: /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/results/routing/cpu.nl.v line 147058, module sky130_fd_sc_hd__fill_1 not found. Creating black box for FILLER_0_0_27.
+Warning: /openlane/designs/RV32_pipelined/runs/RUN_2023.06.13_19.46.51/results/routing/cpu.nl.v line 159002, module sky130_fd_sc_hd__fill_2 not found. Creating black box for FILLER_0_51_1781.
+Warning: There are 33 unclocked register/latch pins.
+Warning: There are 65 unconstrained endpoints.
+[WARNING] Did not save OpenROAD database!

@@ -1,0 +1,203 @@
+VERSION 5.7 ;
+  NOWIREEXTENSIONATPIN ON ;
+  DIVIDERCHAR "/" ;
+  BUSBITCHARS "[]" ;
+MACRO cpu
+  CLASS BLOCK ;
+  FOREIGN cpu ;
+  ORIGIN 0.000 0.000 ;
+  SIZE 1000.000 BY 1000.000 ;
+  PIN VGND
+    USE GROUND ;
+    PORT
+      LAYER met5 ;
+        RECT 5.280 949.110 994.300 950.710 ;
+    END
+    PORT
+      LAYER met5 ;
+        RECT 5.280 795.930 994.300 797.530 ;
+    END
+    PORT
+      LAYER met5 ;
+        RECT 5.280 642.750 994.300 644.350 ;
+    END
+    PORT
+      LAYER met5 ;
+        RECT 5.280 489.570 994.300 491.170 ;
+    END
+    PORT
+      LAYER met5 ;
+        RECT 5.280 336.390 994.300 337.990 ;
+    END
+    PORT
+      LAYER met5 ;
+        RECT 5.280 183.210 994.300 184.810 ;
+    END
+    PORT
+      LAYER met5 ;
+        RECT 5.280 30.030 994.300 31.630 ;
+    END
+    PORT
+      LAYER met4 ;
+        RECT 945.940 10.640 947.540 987.600 ;
+    END
+    PORT
+      LAYER met4 ;
+        RECT 792.340 10.640 793.940 987.600 ;
+    END
+    PORT
+      LAYER met4 ;
+        RECT 638.740 10.640 640.340 987.600 ;
+    END
+    PORT
+      LAYER met4 ;
+        RECT 485.140 10.640 486.740 987.600 ;
+    END
+    PORT
+      LAYER met4 ;
+        RECT 331.540 10.640 333.140 987.600 ;
+    END
+    PORT
+      LAYER met4 ;
+        RECT 177.940 10.640 179.540 987.600 ;
+    END
+    PORT
+      LAYER met4 ;
+        RECT 24.340 10.640 25.940 987.600 ;
+    END
+  END VGND
+  PIN VPWR
+    USE POWER ;
+    PORT
+      LAYER met5 ;
+        RECT 5.280 945.810 994.300 947.410 ;
+    END
+    PORT
+      LAYER met5 ;
+        RECT 5.280 792.630 994.300 794.230 ;
+    END
+    PORT
+      LAYER met5 ;
+        RECT 5.280 639.450 994.300 641.050 ;
+    END
+    PORT
+      LAYER met5 ;
+        RECT 5.280 486.270 994.300 487.870 ;
+    END
+    PORT
+      LAYER met5 ;
+        RECT 5.280 333.090 994.300 334.690 ;
+    END
+    PORT
+      LAYER met5 ;
+        RECT 5.280 179.910 994.300 181.510 ;
+    END
+    PORT
+      LAYER met5 ;
+        RECT 5.280 26.730 994.300 28.330 ;
+    END
+    PORT
+      LAYER met4 ;
+        RECT 942.640 10.640 944.240 987.600 ;
+    END
+    PORT
+      LAYER met4 ;
+        RECT 789.040 10.640 790.640 987.600 ;
+    END
+    PORT
+      LAYER met4 ;
+        RECT 635.440 10.640 637.040 987.600 ;
+    END
+    PORT
+      LAYER met4 ;
+        RECT 481.840 10.640 483.440 987.600 ;
+    END
+    PORT
+      LAYER met4 ;
+        RECT 328.240 10.640 329.840 987.600 ;
+    END
+    PORT
+      LAYER met4 ;
+        RECT 174.640 10.640 176.240 987.600 ;
+    END
+    PORT
+      LAYER met4 ;
+        RECT 21.040 10.640 22.640 987.600 ;
+    END
+  END VPWR
+  PIN ZCNVFlags[0]
+    PORT
+      LAYER met3 ;
+        RECT 0.000 683.440 4.000 684.040 ;
+    END
+  END ZCNVFlags[0]
+  PIN ZCNVFlags[1]
+    PORT
+      LAYER met2 ;
+        RECT 647.310 0.000 647.590 4.000 ;
+    END
+  END ZCNVFlags[1]
+  PIN ZCNVFlags[2]
+    PORT
+      LAYER met2 ;
+        RECT 0.090 0.000 0.370 4.000 ;
+    END
+  END ZCNVFlags[2]
+  PIN ZCNVFlags[3]
+    PORT
+      LAYER met2 ;
+        RECT 351.070 996.000 351.350 1000.000 ;
+    END
+  END ZCNVFlags[3]
+  PIN clk
+    PORT
+      LAYER met2 ;
+        RECT 998.290 996.000 998.570 1000.000 ;
+    END
+  END clk
+  PIN rst
+    PORT
+      LAYER met3 ;
+        RECT 996.000 312.840 1000.000 313.440 ;
+    END
+  END rst
+  OBS
+      LAYER li1 ;
+        RECT 5.520 10.795 994.060 987.445 ;
+      LAYER met1 ;
+        RECT 0.070 10.640 994.450 987.600 ;
+      LAYER met2 ;
+        RECT 0.100 995.720 350.790 996.610 ;
+        RECT 351.630 995.720 998.010 996.610 ;
+        RECT 0.100 4.280 998.570 995.720 ;
+        RECT 0.650 4.000 647.030 4.280 ;
+        RECT 647.870 4.000 998.570 4.280 ;
+      LAYER met3 ;
+        RECT 4.000 684.440 998.595 987.525 ;
+        RECT 4.400 683.040 998.595 684.440 ;
+        RECT 4.000 313.840 998.595 683.040 ;
+        RECT 4.000 312.440 995.600 313.840 ;
+        RECT 4.000 10.715 998.595 312.440 ;
+      LAYER met4 ;
+        RECT 46.295 178.335 174.240 986.505 ;
+        RECT 176.640 178.335 177.540 986.505 ;
+        RECT 179.940 178.335 327.840 986.505 ;
+        RECT 330.240 178.335 331.140 986.505 ;
+        RECT 333.540 178.335 481.440 986.505 ;
+        RECT 483.840 178.335 484.740 986.505 ;
+        RECT 487.140 178.335 635.040 986.505 ;
+        RECT 637.440 178.335 638.340 986.505 ;
+        RECT 640.740 178.335 788.640 986.505 ;
+        RECT 791.040 178.335 791.940 986.505 ;
+        RECT 794.340 178.335 942.240 986.505 ;
+        RECT 944.640 178.335 945.540 986.505 ;
+        RECT 947.940 178.335 987.290 986.505 ;
+      LAYER met5 ;
+        RECT 72.340 645.950 987.500 648.500 ;
+        RECT 72.340 492.770 987.500 637.850 ;
+        RECT 72.340 339.590 987.500 484.670 ;
+        RECT 72.340 279.700 987.500 331.490 ;
+  END
+END cpu
+END LIBRARY
+
