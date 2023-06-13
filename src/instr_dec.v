@@ -22,13 +22,13 @@ always @(*) begin
         endcase
     end
     else begin
-        //TODO %Warning-CASEINCOMPLETE: src/instr_dec.v:25:9: Case values incompletely covered (example pattern 0x4)
         case (inst[6:4])
             3'b110: `instType = 6; // brnch
             3'b000: `instType = 0; // load
             3'b010: `instType = 2; // store
             3'b001: `instType = 1; // imm
             3'b011: `instType = 3; // r
+            default: `instType = 3; // TODO better default
         endcase
     end
 
