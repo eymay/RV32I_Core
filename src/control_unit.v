@@ -11,7 +11,7 @@ input wire [31:0] r_for_pc;
 output wire [22:0] cwordID, cwordEX, cwordMEM, cwordWB;
 input wire [31:0] inst;
 wire [31:0] immID;
-input wire [31:0] immEX, immMEM;
+output wire [31:0] immEX, immMEM;
 output wire [31:0] pc, pcEX;
 input wire [3:0] ZCNVFlags;
 
