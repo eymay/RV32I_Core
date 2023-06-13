@@ -10,7 +10,7 @@ input wire clk, rst;
 input wire [31:0] r_for_pc;
 output wire [22:0] cwordID, cwordEX, cwordMEM, cwordWB;
 input wire [31:0] inst;
-wire [31:0] immID;
+//wire [31:0] immID;
 output wire [31:0] immEX, immMEM;
 output wire [31:0] pc, pcEX;
 input wire [3:0] ZCNVFlags;
@@ -23,8 +23,7 @@ pipeline_reg #(.WIDTH(32)) instIDEX (.clk(clk), .rst(rst), .D(instID), .Q(instEX
 pipeline_reg #(.WIDTH(32)) instEXMEM (.clk(clk), .rst(rst), .D(instEX), .Q(instMEM));
 pipeline_reg #(.WIDTH(32)) instMEMWB (.clk(clk), .rst(rst), .D(instMEM), .Q(instWB));
 
-
-immed_gen immed_genID (.cword(cwordID), .inst(instID), .imm(immID));
+//immed_gen immed_genID (.cword(cwordID), .inst(instID), .imm(immID));
 immed_gen immed_genEX (.cword(cwordEX), .inst(instEX), .imm(immEX));
 immed_gen immed_genMEM (.cword(cwordMEM), .inst(instMEM), .imm(immMEM));
 

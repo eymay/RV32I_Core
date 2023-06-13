@@ -4,8 +4,8 @@ module structural_hazard_tb ();
 
 reg clk;
 reg rst;
-
-cpu cpu(clk,rst);
+wire [3:0] zcnv;
+cpu cpu(clk,rst,zcnv);
 
 initial begin
     $dumpvars;
@@ -59,15 +59,15 @@ initial begin
         $display("\nt=%5d", $time);
 
         $display("reg%2d :     %2d", 2, cpu.dp.regfile.mem[2]);
-        // $display("reg%2d :     %2d", 3, cpu.dp.regfile.mem[3]);
-        // $display("reg%2d :     %2d", 4, cpu.dp.regfile.mem[4]);
-        // $display("reg%2d :     %2d", 5, cpu.dp.regfile.mem[5]);
-        // $display("reg%2d :     %2d", 6, cpu.dp.regfile.mem[6]);
-        // $display("reg%2d :     %2d", 7, cpu.dp.regfile.mem[7]);
+        $display("reg%2d :     %2d", 3, cpu.dp.regfile.mem[3]);
+        $display("reg%2d :     %2d", 4, cpu.dp.regfile.mem[4]);
+        $display("reg%2d :     %2d", 5, cpu.dp.regfile.mem[5]);
+        $display("reg%2d :     %2d", 6, cpu.dp.regfile.mem[6]);
+        $display("reg%2d :     %2d", 7, cpu.dp.regfile.mem[7]);
         $display("pc :       %3d", cpu.cu.pc_updater.pc_output);
         // $display("%3d", cpu.cu.pc_updater.pc_output);
         $display("adr%2d..%2d : %2d", 8, 11, cpu.datamem.mem[2]);
-        // $display("adr%2d..%2d : %2d", 12, 15, cpu.datamem.mem[3]);
+         $display("adr%2d..%2d : %2d", 12, 15, cpu.datamem.mem[3]);
 
         if (cpu.cu.pc_updater.pc_output == 9*4) begin
             $finish;

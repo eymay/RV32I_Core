@@ -1,5 +1,5 @@
 
-module cpu (clk,rst);
+module cpu (clk,rst, ZCNVFlags);
 
 input wire clk;
 input wire rst;
@@ -9,7 +9,7 @@ wire [22:0] cwordID, cwordEX, cwordMEM, cwordWB;
 wire [31:0] inst;
 wire [31:0] immEX, immMEM;
 wire [31:0] pc, pcEX;
-wire [3:0] ZCNVFlags;
+output wire [3:0] ZCNVFlags;
 
 // parts of datamem
 parameter DATA_MEM_DEPTH = 128;

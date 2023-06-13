@@ -31,7 +31,7 @@ module regfile (clk, rst, rd_addr0, rd_addr1, wr_addr0, wr_din0, we0, rd_dout0, 
     always @(negedge clk or negedge rst) begin
         if(!rst) begin
             for (integer i = 1; i<DEPTH; i=i+1) begin
-                mem[i] = {WIDTH{1'b0}};
+                mem[i] <= {WIDTH{1'b0}};
             end
         end
         else begin

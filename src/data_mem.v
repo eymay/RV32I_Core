@@ -38,16 +38,7 @@ module data_mem (clk, rst, rd_addr0, wr_addr0, wr_din0, we0, rd_dout0, wr_strb);
 
     // write functionality. writes synchronously, on rising edge of clk.
     // all the write operations are programmed to be strictly little endian
-    always @(posedge clk or negedge rst) begin
-       if (!rst) begin
-            // reset is async, works immediately. rst=0 means reset.
-            for (integer i = 0; i<DEPTH; i=i+1) begin
-                //BLKLOOPINIT: verilator Unsupported: Delayed assignment to array inside for loops (non-delayed is ok)
-                //This is why we use = instead of <= even in a sequential block
-                mem[i] = {32{1'b0}};
-            end
-        end
-        else begin
+    always @(posedge clk ) begin
            if (we0 && rst) begin
                 case (wr_strb)
                      0: mem[wr_addr0][31:0] <= wr_din0[31:0];
@@ -60,11 +51,7 @@ module data_mem (clk, rst, rd_addr0, wr_addr0, wr_din0, we0, rd_dout0, wr_strb);
                      7: mem[wr_addr0][31:24] <= wr_din0[7:0];
                 endcase
             end
-        end
 
-        `ifdef DEBUG_MEM
-            printAll;
-        `endif
     end
 
 
