@@ -197,7 +197,9 @@ always @(*) begin
         // store half
         3'b001: datamem_wr_strb <= {1'b0, immMEM[1], 1'b1};
         // store byte
-        3'b000: datamem_wr_strb <= {1'b1, immMEM[1:0]};
+        3'b000: datamem_wr_strb = {1'b1, immMEM[1:0]};
+        // default: store word
+        default: datamem_wr_strb = 3'b000;
     endcase
 
     case (`fun3MEM)
@@ -233,6 +235,8 @@ always @(*) begin
             else if (immMEM[1:0] == 2'b10) datamem_out <= {{24{datamem_rd_dout0[23]}}, datamem_rd_dout0[23:16]};
             else datamem_out <= {{24{datamem_rd_dout0[31]}}, datamem_rd_dout0[31:24]};
         end
+        //default: LW
+        default: datamem_out = datamem_rd_dout0;
     endcase
 
 
