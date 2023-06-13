@@ -1,6 +1,6 @@
 // `define DEBUG_MEM
 module pipeline_reg (clk, rst, D , Q);
-    parameter WIDTH=1;
+    parameter WIDTH=32;
 
     input wire clk, rst;
     input wire [WIDTH-1:0] D;
@@ -9,18 +9,23 @@ module pipeline_reg (clk, rst, D , Q);
 
     // initialize all registers to 0
     initial begin
-            Q = 0;
+        Q = 0;
     end
 
     // write functionality. writes synchronously, on rising edge of clk.
     always @(posedge clk or negedge rst) begin
-       if (!rst) 
+       if (!rst) begin
             // reset is async, works immediately. rst=0 means reset.
             Q <= 0;
-        else Q <= D;
+       end
+        else begin
+            Q <= D;
+        end
     end
 
 endmodule
+
+
 
 
 

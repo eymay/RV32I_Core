@@ -106,29 +106,60 @@ initial begin
     regfile_rd_addr0 = 0;
     regfile_rd_addr1 = 0;
     regfile_wr_addr0 = 0;
-    regfile_wr_din0 = 0;
+    // regfile_wr_din0 = 0;
+    datamem_out = 0;
 end
 
 always @(*) begin
 
     // funit bindings
-    case (`instTypeEX)
-        // jal, jalr, auipc
-        4'd8, 4'd7, 4'd5: funit_A <= pc;
-        // load, imm, store, reg, lui, brnch
-        4'd0, 4'd1, 4'd2, 4'd3, 4'd4, 4'd6: funit_A <= regfile_rd_dout0_EX;
-        default: funit_A <= -1; // this should never happen
-    endcase
+    if ((`instTypeMEM != 4'd6 && `instTypeMEM != 4'd2) &&
+        (`rdMEM != 0) &&
+        (`rdMEM == `rs1EX)
+    ) begin
+        funit_A <= funit_S_EXMEM.Q;
+    end
+    else if ((`instTypeWB != 4'd6 && `instTypeWB != 4'd2) &&
+        (`rdWB != 0) &&
+        (`rdWB == `rs1EX) &&
+        (`rdMEM != `rs1EX)
+    ) begin
+        funit_A <= regfile_wr_din0_MEMWB.Q;
+    end
+    else begin
+        case (`instTypeEX)
+            // jal, jalr, auipc
+            4'd8, 4'd7, 4'd5: funit_A <= pc;
+            // load, imm, store, reg, lui, brnch
+            4'd0, 4'd1, 4'd2, 4'd3, 4'd4, 4'd6: funit_A <= regfile_rd_dout0_EX;
+            default: funit_A <= -1; // this should never happen
+        endcase
+    end
 
-    case (`instTypeEX)
-        // reg, branch
-        4'd3, 4'd6: funit_B <= regfile_rd_dout1_EX;
-        // store, load, auipc, lui, imm
-        4'd2, 4'd0, 4'd5, 4'd4, 4'd1: funit_B <= immEX;
-        // jal, jalr
-        4'd7, 4'd8: funit_B <= 4;
-        default: funit_B <= -1; // this should never happen
-    endcase
+    if ((`instTypeMEM != 4'd6 && `instTypeMEM != 4'd2) &&
+        (`rdMEM != 0) &&
+        (`rdMEM == `rs2EX)
+    ) begin
+        funit_B <= funit_S_EXMEM.Q;
+    end
+    else if ((`instTypeWB != 4'd6 && `instTypeWB != 4'd2) &&
+        (`rdWB != 0) &&
+        (`rdWB == `rs2EX) &&
+        (`rdMEM != `rs2EX)
+    ) begin
+        funit_B <= regfile_wr_din0_MEMWB.Q;
+    end
+    else begin
+        case (`instTypeEX)
+            // reg, branch
+            4'd3, 4'd6: funit_B <= regfile_rd_dout1_EX;
+            // store, load, auipc, lui, imm
+            4'd2, 4'd0, 4'd5, 4'd4, 4'd1: funit_B <= immEX;
+            // jal, jalr
+            4'd7, 4'd8: funit_B <= 4;
+            default: funit_B <= -1; // this should never happen
+        endcase
+    end
 
     case (`instTypeEX)
         // reg
