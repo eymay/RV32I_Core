@@ -117,14 +117,14 @@ always @(*) begin
         (`rdMEM != 0) &&
         (`rdMEM == `rs1EX)
     ) begin
-        funit_A = funit_S_EXMEM.Q;
+        funit_A = funit_S_MEM;
     end
     else if ((`instTypeWB != 4'd6 && `instTypeWB != 4'd2) &&
         (`rdWB != 0) &&
         (`rdWB == `rs1EX) &&
         (`rdMEM != `rs1EX)
     ) begin
-        funit_A = regfile_wr_din0_MEMWB.Q;
+        funit_A = regfile_wr_din0_WB;
     end
     else begin
         case (`instTypeEX)
@@ -140,14 +140,14 @@ always @(*) begin
         (`rdMEM != 0) &&
         (`rdMEM == `rs2EX)
     ) begin
-        funit_B = funit_S_EXMEM.Q;
+        funit_B = funit_S_MEM;
     end
     else if ((`instTypeWB != 4'd6 && `instTypeWB != 4'd2) &&
         (`rdWB != 0) &&
         (`rdWB == `rs2EX) &&
         (`rdMEM != `rs2EX)
     ) begin
-        funit_B = regfile_wr_din0_MEMWB.Q;
+        funit_B = regfile_wr_din0_WB;
     end
     else begin
         case (`instTypeEX)
@@ -166,7 +166,10 @@ always @(*) begin
         (`rdWB != 0) &&
         (`rdWB == `rs2MEM)
     ) begin
-        regfile_rd_dout1_EXMEM.Q = regfile_wr_din0_MEMWB.Q;
+        datamem_wr_din0 <= regfile_wr_din0_WB;
+    end
+    else begin
+        datamem_wr_din0 <= regfile_rd_dout1_MEM;
     end
 
     case (`instTypeEX)
@@ -267,3 +270,4 @@ endmodule
 
 // load, imm, store, reg, lui, auipc, brnch, jalr, jal
 // 0     1    2      3    4    5      6      7     8
+//
