@@ -21,7 +21,7 @@ module Memblock (clk, rst, rd_addr0, wr_addr0, wr_din0, we0, rd_dout0 );
 
 
     // write functionality. writes synchronously, on rising edge of clk.
-    always @(posedge clk, rst) begin
+    always @(posedge clk or negedge rst) begin
        if (we0 && rst) begin
             mem[wr_addr0] = wr_din0;
         end
