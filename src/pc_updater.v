@@ -74,7 +74,7 @@ always @(posedge clk) begin
     end
 end
 
-always @(S) begin
+always @(*) begin
     pc_output = {S[31:2], 2'b0};
 end
 
