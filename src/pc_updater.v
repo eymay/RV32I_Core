@@ -45,7 +45,7 @@ always @(posedge clk) begin
         A <= r;
     end
     else begin
-        if ((`fun3==`BEQ && `Z_flag==1'b1) || 
+        if (`instType==4'd6 && (`fun3==`BEQ && `Z_flag==1'b1) || 
             (`fun3==`BNE && `Z_flag==1'b0) || 
             (`fun3==`BLT && (`N_flag^`V_flag)==1'b1) || 
             (`fun3==`BGE && (`N_flag^`V_flag)==1'b0) || 

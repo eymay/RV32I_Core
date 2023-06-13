@@ -2,7 +2,7 @@
 
 // iverilog tb/exponentiation_tb.v src/cpu.v src/control_unit.v src/Datapath.v src/instr_mem.v src/FunctionUnit.v src/data_mem.v src/immed_gen.v src/instr_dec.v src/pc_updater.v src/regfile.v src/ALU_LL.v src/ripple_carry_adder_subtractor.v src/shifter.v src/full_adder_LL_nodelay.v src/logical_unit.v src/shift_right.v src/mux_2to1.v src/pipeline_reg.v
 
-`define NUMBER_TO_SQUARE 7
+`define NUMBER_TO_SQUARE 5
 
 module exponentiation_tb ();
 
@@ -41,11 +41,13 @@ initial begin
         $display("reg%2d (a0) : %2d", 10, cpu.dp.regfile.mem[10]);
         $display("pc : %d", cpu.cu.pc_updater.pc_output);
 
+        // if the program succeeds, directly finish
         if (cpu.dp.regfile.mem[10] == `NUMBER_TO_SQUARE * `NUMBER_TO_SQUARE) begin
             $finish;
         end
 
-        if (cpu.cu.pc_updater.pc_output == 108*4) begin // the last instruction
+        // if the program fails, still finish when it reaches the end
+        if (cpu.cu.pc_updater.pc_output == 108*4) begin
             $finish;
         end
 

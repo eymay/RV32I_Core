@@ -15,20 +15,27 @@ initial begin
     #1; // initialize memories with data after t=0 because at t=0 they're filled with zeros.
 
     // initialize instruction memory:
-    cpu.instr_mem.mem[0] = 32'h00a10113; // addi x2, x2, 10
-    cpu.instr_mem.mem[1] = 32'h00202023; // sw x2, 0(x0)
-    cpu.instr_mem.mem[2] = 32'h00a10113; // addi x2, x2, 10
-    cpu.instr_mem.mem[3] = 32'h00202023; // sw x2, 0(x0)
-    cpu.instr_mem.mem[4] = 32'h00a10113; // addi x2, x2, 10
-    cpu.instr_mem.mem[5] = 32'h00202023; // sw x2, 0(x0)
-    cpu.instr_mem.mem[6] = 32'h00a10113; // addi x2, x2, 10
-    cpu.instr_mem.mem[7] = 32'h00202023; // sw x2, 0(x0)
+    // cpu.instr_mem.mem[0] = 32'h00a00113; // addi x2, x0, 10
+    // cpu.instr_mem.mem[1] = 32'h00000033; // nop
+    // cpu.instr_mem.mem[2] = 32'h00000033; // nop
+    // cpu.instr_mem.mem[3] = 32'h00210023; // sb x2, 0(x2)
+    cpu.instr_mem.mem[0] = 32'h00418133; // addi x2, x3, x4
+    cpu.instr_mem.mem[1] = 32'h007362b3; // or x5, x6, x7
+    cpu.instr_mem.mem[2] = 32'h00312433; // slt x8, x2, x3
+    cpu.instr_mem.mem[3] = 32'h0022a223; // sw x2, 10(x5)
+    cpu.instr_mem.mem[4] = 32'h00000033; // nop
+    cpu.instr_mem.mem[5] = 32'h00000033; // nop
+    cpu.instr_mem.mem[6] = 32'h00000033; // nop
+    cpu.instr_mem.mem[7] = 32'h00000033; // nop
     cpu.instr_mem.mem[8] = 32'h00000033; // nop
-    cpu.instr_mem.mem[9] = 32'h00000033; // nop
-    cpu.instr_mem.mem[10] = 32'h00000033; // nop
-    cpu.instr_mem.mem[11] = 32'h00000033; // nop
-    cpu.instr_mem.mem[12] = 32'h00000033; // nop
-    cpu.instr_mem.mem[13] = 32'h00000033; // nop
+    for (integer i = 9; i<100; i=i+1) begin
+        cpu.instr_mem.mem[i] = 32'h00000033; // nop
+    end
+
+    // initialize registers
+    cpu.dp.regfile.mem[3] = 3;
+    cpu.dp.regfile.mem[4] = 4;
+
 end
 
 always begin
@@ -43,12 +50,12 @@ initial begin
 
         $display("\nt=%5d", $time);
 
-        $display("reg%2d : %2d", 10, cpu.dp.regfile.mem[2]);
-        $display("pc : %d", cpu.cu.pc_updater.pc_output);
-        // $display("adr%2d..%2d : %d", 8, 11, cpu.datamem.mem[2]);
-        $display("adr%2d..%2d : %d", 0, 3, cpu.datamem.mem[0]);
+        $display("reg%2d :     %2d", 10, cpu.dp.regfile.mem[2]);
+        $display("pc :       %3d", cpu.cu.pc_updater.pc_output);
+        // $display("%3d", cpu.cu.pc_updater.pc_output);
+        $display("adr%2d..%2d : %2d", 8, 11, cpu.datamem.mem[2]);
 
-        if (cpu.cu.pc_updater.pc_output == 36) begin
+        if (cpu.cu.pc_updater.pc_output == 8*4) begin
             $finish;
         end
 
