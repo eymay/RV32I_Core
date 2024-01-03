@@ -28,6 +28,7 @@ control_unit cu (
     .inst(inst),
     .r_for_pc(r_for_pc),
     .ZCNVFlags(ZCNVFlags));
+
 Datapath dp (
     .clk(clk),
     .rst(rst),
@@ -43,9 +44,11 @@ Datapath dp (
     .datamem_we0(datamem_we0),
     .datamem_rd_dout0(datamem_rd_dout0),
     .datamem_wr_strb(datamem_wr_strb));
+
 instr_mem instr_mem (
     .r_addr_imem(pc[6:0]), // note: this must be changed according to the inst mem size
     .r_data_imem(inst));
+
 data_mem datamem (
     .clk(clk),
     .rst(rst),
